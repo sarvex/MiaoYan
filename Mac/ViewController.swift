@@ -57,7 +57,6 @@ class ViewController:
     @IBOutlet var notesListCustomView: NSView!
     @IBOutlet var outlineHeader: OutlineHeaderView!
 
-    @IBOutlet var titlebarTopConstraint: NSLayoutConstraint!
     @IBOutlet var titiebarHeight: NSLayoutConstraint!
     @IBOutlet var searchTopConstraint: NSLayoutConstraint!
     @IBOutlet var titleLabel: TitleTextField!
@@ -1875,17 +1874,26 @@ class ViewController:
         notesTableView.scrollRowToVisible(0)
     }
 
+    
     func focusEditArea(firstResponder: NSResponder? = nil) {
         guard EditTextView.note != nil else { return }
-
-        editArea.window?.makeFirstResponder(editArea)
+        var resp: NSResponder = editArea
+        if let responder = firstResponder {
+            resp = responder
+        }
 
         if notesTableView.selectedRow > -1 {
             DispatchQueue.main.async {
                 self.editArea.isEditable = true
                 self.emptyEditAreaView.isHidden = true
+                self.titleBarView.isHidden = false
+                self.editArea.window?.makeFirstResponder(resp)
+                self.editArea.restoreCursorPosition()
             }
+            return
         }
+
+        editArea.window?.makeFirstResponder(resp)
     }
 
     func focusSearchInput(firstResponder: NSResponder? = nil) {
@@ -2373,11 +2381,9 @@ class ViewController:
 
     func checkTitlebarTopConstraint() {
         if splitView.subviews[0].frame.width < 50,!UserDefaultsManagement.isWillFullScreen {
-            titlebarTopConstraint.constant = 27.0
-            titiebarHeight.constant = 60.0
+            titiebarHeight.constant = 66.0
             return
         }
-        titlebarTopConstraint.constant = 14.5
         titiebarHeight.constant = 52.0
     }
 
