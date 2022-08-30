@@ -1319,8 +1319,6 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				MARKETING_VERSION = 1.4.7;
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MARKETING_VERSION = 1.5.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tw93.MiaoYan;
@@ -1366,8 +1364,6 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				MARKETING_VERSION = 1.4.7;
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MARKETING_VERSION = 1.5.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tw93.MiaoYan;
