@@ -669,7 +669,7 @@ class EditTextView: NSTextView, NSTextFinderClient {
             return true
         }
 
-        if let data = board.data(forType: NSPasteboard.PasteboardType(rawValue: "attributedText")), let attributedText = NSKeyedUnarchiver.unarchiveObject(with: data) as? NSMutableAttributedString {
+        if let data = board.data(forType: NSPasteboard.PasteboardType(rawValue: "attributedText")), let attributedText = (try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data)) as? NSMutableAttributedString {
             let dropPoint = convert(sender.draggingLocation, from: nil)
             let caretLocation = characterIndexForInsertion(at: dropPoint)
 
@@ -875,11 +875,14 @@ class EditTextView: NSTextView, NSTextFinderClient {
         let positionKey = NSAttributedString.Key(rawValue: "com.tw93.miaoyan.image.position")
         attributedString.addAttribute(positionKey, value: selectedRange().location, range: NSRange(0..<1))
 
-        let data = NSKeyedArchiver.archivedData(withRootObject: attributedString)
-        let type = NSPasteboard.PasteboardType(rawValue: "attributedText")
-        let board = sender.draggingPasteboard
-        board.setData(data, forType: type)
-
+        do {
+            let data = try NSKeyedArchiver.archivedData(withRootObject: attributedString, requiringSecureCoding: true)
+            let type = NSPasteboard.PasteboardType(rawValue: "attributedText")
+            let board = sender.draggingPasteboard
+            board.setData(data, forType: type)
+        } catch {
+            print(error)
+        }
         return .copy
     }
 
@@ -925,13 +928,13 @@ class EditTextView: NSTextView, NSTextFinderClient {
 
         NotesTextProcessor.hl = nil
         NotesTextProcessor.highlight(note: note)
-        
-        //用于自动模式下切换时候的效果
+
+        // 用于自动模式下切换时候的效果
         if UserDefaultsManagement.preview {
             vc.disablePreview()
             vc.enablePreview()
         }
-        
+
         viewDelegate?.refillEditArea()
     }
 
@@ -1068,7 +1071,7 @@ class EditTextView: NSTextView, NSTextFinderClient {
                     vc.toastUpload(status: true)
                     let runList = run("/Applications/\(picType).app/Contents/MacOS/\(picType) -o url -u \(tempPath)")
                     let imageDesc = runList?.components(separatedBy: "\n") ?? []
-                    
+
                     if imageDesc.count > 3 {
                         let imagePath = imageDesc[4]
                         newLineImage = NSAttributedString(string: "![](\(imagePath))")

@@ -61,7 +61,7 @@ class ViewController:
     @IBOutlet var searchTopConstraint: NSLayoutConstraint!
     @IBOutlet var titleLabel: TitleTextField!
     @IBOutlet var titleTopConstraint: NSLayoutConstraint!
-    
+
     @IBOutlet var sortByOutlet: NSMenuItem!
     @IBOutlet var titleBarAdditionalView: NSVisualEffectView! {
         didSet {
@@ -1876,7 +1876,6 @@ class ViewController:
         notesTableView.scrollRowToVisible(0)
     }
 
-    
     func focusEditArea(firstResponder: NSResponder? = nil) {
         guard EditTextView.note != nil else { return }
         var resp: NSResponder = editArea
@@ -2254,9 +2253,9 @@ class ViewController:
         }
         if let note = notesTableView.getSelectedNote() {
             // 最牛逼格式化的方式
-            let formatter = PrettierFormatter(plugins: [MarkdownPlugin()] , parser: MarkdownParser())
+            let formatter = PrettierFormatter(plugins: [MarkdownPlugin()], parser: MarkdownParser())
             formatter.prepare()
-      
+
             let result = formatter.format(note.content.string)
             switch result {
             case .success(let formattedCode):
@@ -2268,7 +2267,7 @@ class ViewController:
             case .failure(let error):
                 print(error)
             }
-            
+
             Analytics.trackEvent("MiaoYan Format")
         }
     }
