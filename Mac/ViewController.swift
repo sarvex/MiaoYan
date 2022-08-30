@@ -60,7 +60,8 @@ class ViewController:
     @IBOutlet var titiebarHeight: NSLayoutConstraint!
     @IBOutlet var searchTopConstraint: NSLayoutConstraint!
     @IBOutlet var titleLabel: TitleTextField!
-
+    @IBOutlet var titleTopConstraint: NSLayoutConstraint!
+    
     @IBOutlet var sortByOutlet: NSMenuItem!
     @IBOutlet var titleBarAdditionalView: NSVisualEffectView! {
         didSet {
@@ -929,7 +930,8 @@ class ViewController:
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                     self.titleLabel.saveTitle()
                 }
-                disablePreview()
+                // 其实这里首次使用会和文本 click 冲突，先注释掉
+                // disablePreview()
             }
             return true
         }
@@ -2391,9 +2393,11 @@ class ViewController:
 
     func checkTitlebarTopConstraint() {
         if splitView.subviews[0].frame.width < 50,!UserDefaultsManagement.isWillFullScreen {
-            titiebarHeight.constant = 66.0
+            titleTopConstraint.constant = 26.0
+            titiebarHeight.constant = 63.0
             return
         }
+        titleTopConstraint.constant = 15.0
         titiebarHeight.constant = 52.0
     }
 
