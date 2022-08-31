@@ -13,7 +13,6 @@ class NoteCellView: NSTableCellView {
 
     public var tableView: NotesTableView? {
         guard let vc = ViewController.shared() else { return nil }
-
         return vc.notesTableView
     }
 
@@ -21,7 +20,6 @@ class NoteCellView: NSTableCellView {
         if let originY = UserDefaultsManagement.cellViewFrameOriginY {
             adjustTopMargin(margin: originY)
         }
-
         super.viewWillDraw()
     }
 
