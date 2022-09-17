@@ -687,7 +687,7 @@ class EditTextView: NSTextView, NSTextFinderClient {
             return true
         }
 
-        if let data = board.data(forType: NSPasteboard.PasteboardType(rawValue: "attributedText")), let attributedText = (try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data)) as? NSMutableAttributedString {
+        if let data = board.data(forType: NSPasteboard.PasteboardType(rawValue: "attributedText")), let attributedText = NSKeyedUnarchiver.unarchiveObject(with: data) as? NSMutableAttributedString {
             let dropPoint = convert(sender.draggingLocation, from: nil)
             let caretLocation = characterIndexForInsertion(at: dropPoint)
 
@@ -892,14 +892,11 @@ class EditTextView: NSTextView, NSTextFinderClient {
         let positionKey = NSAttributedString.Key(rawValue: "com.tw93.miaoyan.image.position")
         attributedString.addAttribute(positionKey, value: selectedRange().location, range: NSRange(0..<1))
 
-        do {
-            let data = try NSKeyedArchiver.archivedData(withRootObject: attributedString, requiringSecureCoding: true)
-            let type = NSPasteboard.PasteboardType(rawValue: "attributedText")
-            let board = sender.draggingPasteboard
-            board.setData(data, forType: type)
-        } catch {
-            print(error)
-        }
+        let data = NSKeyedArchiver.archivedData(withRootObject: attributedString)
+        let type = NSPasteboard.PasteboardType(rawValue: "attributedText")
+        let board = sender.draggingPasteboard
+        board.setData(data, forType: type)
+
         return .copy
     }
 
