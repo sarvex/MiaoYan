@@ -1125,9 +1125,15 @@ public class Note: NSObject {
 
     public func getTitle() -> String? {
         if title.count > 0 {
+
             if title.isValidUUID {
                 return getDefaultTitle()
             }
+
+            if title.starts(with: "![") {
+                return nil;
+            }
+
             return title
         }
 

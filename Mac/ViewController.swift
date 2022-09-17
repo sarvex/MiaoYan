@@ -29,6 +29,8 @@ class ViewController:
     var rowUpdaterTimer = Timer()
     let searchQueue = OperationQueue()
     var isFocusedTitle: Bool = false
+    var formatContent: String = ""
+    var isFirstClick: Bool = true
 
     private var isHandlingScrollEvent = false
     private var swipeLeftExecuted = false
@@ -36,6 +38,7 @@ class ViewController:
     private var scrollDeltaX: CGFloat = 0
 
     private var updateViews = [Note]()
+    public var breakUndoTimer = Timer()
 
     override var representedObject: Any? {
         didSet {}
@@ -264,16 +267,6 @@ class ViewController:
         }
     }
 
-    func checkDefaultSetting() {
-        if UserDefaultsManagement.fontName == UserDefaultsManagement.DefaultFont {
-            UserDefaultsManagement.editorLineHeight = UserDefaultsManagement.DefaultEditorLineHeight
-            UserDefaultsManagement.editorLineSpacing = UserDefaultsManagement.DefaultEditorLineSpacing
-        } else {
-            UserDefaultsManagement.editorLineHeight = UserDefaultsManagement.HackEditorLineHeight
-            UserDefaultsManagement.editorLineSpacing = UserDefaultsManagement.HackEditorLineSpacing
-        }
-    }
-
     override func viewDidAppear() {
         if UserDefaultsManagement.fullScreen {
             view.window?.toggleFullScreen(nil)
@@ -321,6 +314,17 @@ class ViewController:
                     self.showNoteList("")
                 }
             }
+        }
+
+        // 兼容新系统 13.0 的标题闪动问题
+        if isFirstClick, #available(OSX 13.0, *) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                self.titleLabel.editModeOn()
+                self.enablePreview()
+                self.disablePreview()
+                self.focusEditArea()
+            }
+            isFirstClick = false
         }
     }
 
@@ -399,14 +403,14 @@ class ViewController:
         editArea.isEditable = false
 
         editArea.layoutManager?.defaultAttachmentScaling = .scaleProportionallyDown
+        editArea.layoutManager?.typesetterBehavior = .behavior_10_2_WithCompatibility
 
         editArea.font = UserDefaultsManagement.noteFont
         titleLabel.font = UserDefaultsManagement.titleFont.titleBold()
 
         emptyEditTitle.font = UserDefaultsManagement.emptyEditTitleFont
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = CGFloat(UserDefaultsManagement.editorLineSpacing)
-        paragraphStyle.lineHeightMultiple = CGFloat(UserDefaultsManagement.editorLineHeight)
+
+        let paragraphStyle = NSTextStorage.getParagraphStyle()
         editArea.defaultParagraphStyle = paragraphStyle
         editArea.typingAttributes[.paragraphStyle] = paragraphStyle
         setTableRowHeight()
@@ -420,7 +424,6 @@ class ViewController:
         notesScrollView.scrollerStyle = .overlay
         sidebarScrollView.scrollerStyle = .overlay
         sidebarScrollView.horizontalScroller = .none
-        checkDefaultSetting()
     }
 
     private func configureNotesList() {
@@ -511,20 +514,18 @@ class ViewController:
         let name = sender.identifier!.rawValue
         if name == "Ascending", UserDefaultsManagement.sortDirection {
             UserDefaultsManagement.sortDirection = false
-            resort()
+            reSortByDirection()
         }
         if name == "Descending", !UserDefaultsManagement.sortDirection {
             UserDefaultsManagement.sortDirection = true
-            resort()
+            reSortByDirection()
         }
     }
 
     @IBAction func sortBy(_ sender: NSMenuItem) {
         if let id = sender.identifier {
             let key = String(id.rawValue.dropFirst(3))
-            guard let sortBy = SortBy(rawValue: key) else {
-                return
-            }
+            guard let sortBy = SortBy(rawValue: key) else { return }
 
             UserDefaultsManagement.sort = sortBy
 
@@ -535,31 +536,45 @@ class ViewController:
             }
 
             sender.state = NSControl.StateValue.on
-            resort()
+
+            reSortByDirection()
         }
     }
 
-    func resort() {
+    func reSortByDirection() {
         guard let vc = ViewController.shared() else {
             return
         }
         ascendingCheckItem.state = UserDefaultsManagement.sortDirection ? .off : .on
         descendingCheckItem.state = UserDefaultsManagement.sortDirection ? .on : .off
-        guard let controller = ViewController.shared() else {
-            return
-        }
 
         // Sort all notes
-        storage.noteList = storage.sortNotes(noteList: storage.noteList, filter: controller.search.stringValue)
+        storage.noteList = storage.sortNotes(noteList: storage.noteList, filter: vc.search.stringValue)
 
         // Sort notes in the current project
-        if let filtered = controller.filteredNoteList {
-            controller.notesTableView.noteList = storage.sortNotes(noteList: filtered, filter: controller.search.stringValue)
+        if let filtered = vc.filteredNoteList {
+            vc.notesTableView.noteList = storage.sortNotes(noteList: filtered, filter: vc.search.stringValue)
         } else {
-            controller.notesTableView.noteList = storage.noteList
+            vc.notesTableView.noteList = storage.noteList
         }
 
         vc.updateTable()
+        // 修复排序后不选中问题
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.04) {
+            let selectedRow = vc.notesTableView.selectedRowIndexes.min()
+            if selectedRow == nil {
+                vc.notesTableView.selectRowIndexes([0], byExtendingSelection: true)
+            }
+        }
+    }
+
+    public func reSort(note: Note) {
+        if !updateViews.contains(note) {
+            updateViews.append(note)
+        }
+
+        rowUpdaterTimer.invalidate()
+        rowUpdaterTimer = Timer.scheduledTimer(timeInterval: 1.2, target: self, selector: #selector(updateTableViews), userInfo: nil, repeats: false)
     }
 
     @objc func moveNote(_ sender: NSMenuItem) {
@@ -746,6 +761,11 @@ class ViewController:
             return false
         }
 
+        if event.modifierFlags.contains(.shift), event.modifierFlags.contains(.control), event.keyCode == kVK_ANSI_H {
+            exportHtml("")
+            return false
+        }
+
         if event.keyCode == kVK_Escape, UserDefaultsManagement.presentation {
             disablePresentation()
         }
@@ -790,7 +810,17 @@ class ViewController:
             return false
         }
 
-        if event.modifierFlags.contains(.command), event.modifierFlags.contains(.option), event.keyCode == kVK_ANSI_I,!UserDefaultsManagement.presentation {
+        if event.keyCode == kVK_ANSI_Z, event.modifierFlags.contains(.command), editArea.hasFocus(), formatContent != "" {
+            if let note = notesTableView.getSelectedNote(), note.content.string == formatContent {
+                let cursor = editArea.selectedRanges[0].rangeValue.location
+                DispatchQueue.main.async {
+                    self.editArea.setSelectedRange(NSRange(location: cursor, length: 0))
+                }
+                formatContent = ""
+            }
+        }
+
+        if event.modifierFlags.contains(.command), event.modifierFlags.contains(.option), event.keyCode == kVK_ANSI_I, !UserDefaultsManagement.presentation {
             toggleInfo()
             return false
         }
@@ -807,7 +837,7 @@ class ViewController:
                 UserDefaultsManagement.singleModePath = ""
                 showSidebar("")
                 setSideDividerHidden(hidden: false)
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                     self.restart()
                 }
             }
@@ -930,20 +960,18 @@ class ViewController:
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                     self.titleLabel.saveTitle()
                 }
-                // 其实这里首次使用会和文本 click 冲突，先注释掉
-                // disablePreview()
+                return true
             }
-            return true
         }
 
         // Pin note shortcut (cmd+shift+p)
-        if event.keyCode == kVK_ANSI_P, event.modifierFlags.contains(.shift), event.modifierFlags.contains(.command),!UserDefaultsManagement.presentation {
+        if event.keyCode == kVK_ANSI_P, event.modifierFlags.contains(.shift), event.modifierFlags.contains(.command), !UserDefaultsManagement.presentation {
             pin(notesTableView.selectedRowIndexes)
             return true
         }
 
         // 展开 sidebar cmd+1
-        if event.modifierFlags.contains(.command), event.keyCode == kVK_ANSI_1,!UserDefaultsManagement.presentation {
+        if event.modifierFlags.contains(.command), event.keyCode == kVK_ANSI_1, !UserDefaultsManagement.presentation {
             toggleSidebar("")
             return false
         }
@@ -982,10 +1010,8 @@ class ViewController:
         if UserDefaultsManagement.isSingleMode {
             UserDefaultsManagement.isSingleMode = false
             UserDefaultsManagement.singleModePath = ""
-            DispatchQueue.main.async {
-                self.showSidebar("")
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.16) {
+            showSidebar("")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
                 NSApplication.shared.terminate(self)
             }
         } else {
@@ -1185,7 +1211,7 @@ class ViewController:
 
         vc.titleLabel.editModeOn()
         if let note = EditTextView.note {
-            vc.titleLabel.stringValue = note.getShortTitle()
+            vc.titleLabel.stringValue = note.getFileName()
         }
     }
 
@@ -1519,7 +1545,7 @@ class ViewController:
         }
 
         if let sidebarItem = vc.getSidebarItem(), sidebarItem.isTrash() {
-            let indexSet = IndexSet(integersIn: 0 ..< vc.notesTableView.noteList.count)
+            let indexSet = IndexSet(integersIn: 0..<vc.notesTableView.noteList.count)
             vc.notesTableView.removeRows(at: indexSet, withAnimation: .effectFade)
         }
 
@@ -1578,7 +1604,7 @@ class ViewController:
 
         blockFSUpdates()
 
-        if editArea.isEditable {
+        if !UserDefaultsManagement.preview, editArea.isEditable {
             editArea.removeHighlight()
             editArea.saveImages()
 
@@ -1629,6 +1655,10 @@ class ViewController:
                         vc.notesTableView.removeByNotes(notes: notes)
                         if let i = selectedRow, i > -1 {
                             vc.notesTableView.selectRow(i)
+                        }
+                        if vc.getSidebarItem() == nil {
+                            vc.storageOutlineView.selectRowIndexes([0], byExtendingSelection: false)
+                            vc.notesTableView.selectRow(0)
                         }
                     }
                 }
@@ -2123,15 +2153,11 @@ class ViewController:
     }
 
     func enableMiaoYanPPT() {
-        guard let vc = ViewController.shared() else {
-            return
-        }
+        guard let vc = ViewController.shared() else { return }
         enablePresentation()
         UserDefaultsManagement.magicPPT = true
         DispatchQueue.main.async {
             vc.titiebarHeight.constant = 0.0
-            vc.sidebarSplitView.setValue(NSColor.black, forKey: "dividerColor")
-            vc.splitView.setValue(NSColor.black, forKey: "dividerColor")
             // 兼容空格下一个的场景
             NSApp.mainWindow?.makeFirstResponder(vc.editArea.markdownView)
         }
@@ -2142,7 +2168,7 @@ class ViewController:
         disablePresentation()
         UserDefaultsManagement.magicPPT = false
         DispatchQueue.main.async {
-            self.titiebarHeight.constant = 52.0
+            self.checkTitlebarTopConstraint()
         }
     }
 
@@ -2173,7 +2199,6 @@ class ViewController:
     }
 
     func disablePreview() {
-        UserDefaultsManagement.scrollPer = 0.0
         UserDefaultsManagement.preview = false
         editArea.markdownView?.removeFromSuperview()
         editArea.markdownView = nil
@@ -2224,7 +2249,7 @@ class ViewController:
         UserDefaultsManagement.presentation = false
         UserDefaultsManagement.magicPPT = false
         DispatchQueue.main.async {
-            self.titiebarHeight.constant = 52.0
+            self.checkTitlebarTopConstraint()
         }
         if UserDefaultsManagement.fullScreen {
             view.window?.toggleFullScreen(nil)
@@ -2255,13 +2280,22 @@ class ViewController:
             // 最牛逼格式化的方式
             let formatter = PrettierFormatter(plugins: [MarkdownPlugin()], parser: MarkdownParser())
             formatter.prepare()
-
-            let result = formatter.format(note.content.string)
+            let content = note.content.string
+            let cursor = editArea.selectedRanges[0].rangeValue.location
+            let top = editAreaScroll.contentView.bounds.origin.y
+            let result = formatter.format(content, withCursorAtLocation: cursor)
             switch result {
-            case .success(let formattedCode):
-                note.content = NSMutableAttributedString(string: formattedCode)
-                let cursor = editArea.selectedRanges[0].rangeValue.location
-                refillEditArea(cursor: cursor, saveTyping: true)
+            case .success(let formatResult):
+                // 防止 Prettier 自动加空行
+                var newContent = formatResult.formattedString
+                if content.last != "\n" {
+                    newContent = formatResult.formattedString.removeLastNewLine()
+                }
+                editArea.insertText(newContent, replacementRange: NSRange(0..<note.content.length))
+                editArea.fill(note: note, saveTyping: true, force: false, needScrollToCursor: false)
+                editArea.setSelectedRange(NSRange(location: formatResult.cursorOffset, length: 0))
+                editAreaScroll.documentView?.scroll(NSPoint(x: 0, y: top))
+                formatContent = newContent
                 note.save()
                 toast(message: NSLocalizedString("🎉 Automatic typesetting succeeded~", comment: ""))
             case .failure(let error):
@@ -2391,13 +2425,18 @@ class ViewController:
     }
 
     func checkTitlebarTopConstraint() {
-        if splitView.subviews[0].frame.width < 50,!UserDefaultsManagement.isWillFullScreen {
-            titleTopConstraint.constant = 26.0
-            titiebarHeight.constant = 63.0
+        if splitView.subviews[0].frame.width < 50, !UserDefaultsManagement.isWillFullScreen {
+            titiebarHeight.constant = 60.0
+            titleTopConstraint.constant = 24.0
             return
         }
         titleTopConstraint.constant = 15.0
         titiebarHeight.constant = 52.0
+        if UserDefaultsManagement.windowFontName == "Helvetica Neue" || UserDefaultsManagement.windowFontName == "Times New Roman" {
+            titleTopConstraint.constant = 14.0
+        } else {
+            titleTopConstraint.constant = 10.0
+        }
     }
 
     @IBAction func duplicate(_ sender: Any) {
@@ -2490,30 +2529,51 @@ class ViewController:
         formatText()
     }
 
-    @IBAction func exportImage(_ sender: Any) {
+    func exportFile(type: String) {
         UserDefaultsManagement.isOnExport = true
+
+        if type == "Html" {
+            UserDefaultsManagement.isOnExportHtml = true
+        }
         toast(message: NSLocalizedString("🙊 Starting export~", comment: ""))
+
+        if UserDefaultsManagement.preview {
+            disablePreview()
+        }
+
         enablePreview()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            self.editArea.markdownView?.exportImage()
-            UserDefaultsManagement.isOnExport = false
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 6.0) {
+            switch type {
+            case "Image":
+                self.editArea.markdownView?.exportImage()
+            case "Html":
+                self.editArea.markdownView?.exportHtml()
+            case "PDF":
+                self.editArea.markdownView?.exportPdf()
+            default:
+                print("Export no Type")
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                UserDefaultsManagement.isOnExport = false
+                if type == "Html" {
+                    UserDefaultsManagement.isOnExportHtml = false
+                }
                 self.disablePreview()
             }
         }
-        Analytics.trackEvent("MiaoYan Export", withProperties: ["Type": "Image"])
+        Analytics.trackEvent("MiaoYan Export", withProperties: ["Type": type])
+    }
+
+    @IBAction func exportImage(_ sender: Any) {
+        exportFile(type: "Image")
+    }
+
+    @IBAction func exportHtml(_ sender: Any) {
+        exportFile(type: "Html")
     }
 
     @IBAction func exportPdf(_ sender: Any) {
-        UserDefaultsManagement.isOnExport = true
-        toast(message: NSLocalizedString("🙊 Starting export~", comment: ""))
-        enablePreview()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
-            self.editArea.markdownView?.exportPdf()
-            UserDefaultsManagement.isOnExport = false
-            self.disablePreview()
-        }
-        Analytics.trackEvent("MiaoYan Export", withProperties: ["Type": "PDF"])
+        exportFile(type: "PDF")
     }
 
     @IBAction func exportMiaoYanPPT(_ sender: Any) {
@@ -2643,6 +2703,22 @@ class ViewController:
             try? FileManager.default.copyItem(at: url, to: baseUrl)
 
             return baseUrl
+        }
+    }
+
+    @objc func breakUndo() {
+        if !UserDefaultsManagement.preview, editArea.isEditable {
+            editArea.breakUndoCoalescing()
+        }
+    }
+
+    public func replace(validateString: String, regex: String, content: String) -> String {
+        do {
+            let RE = try NSRegularExpression(pattern: regex, options: .caseInsensitive)
+            let modified = RE.stringByReplacingMatches(in: validateString, options: .reportProgress, range: NSRange(location: 0, length: validateString.count), withTemplate: content)
+            return modified
+        } catch {
+            return validateString
         }
     }
 }

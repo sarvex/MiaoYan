@@ -23,14 +23,14 @@
 
 ## 特点
 
-- 🪂 **妙**：纯本地使用、安全、语法高亮、黑暗模式、源文件保存、国际化、演示模式、[PPT 模式](#妙言-ppt)、单独编辑模式、文档自动排版、文档导出、内部跳转、图床、LaTeX、Mermaid、PlantUML、Markmap
-- 🐶 **美**：极简的设计风格，文件夹 + 文件列表 + 编辑器方式 3 列模式
-- 🏌🏽‍♂️ **快**：使用 Swift5 原生开发，相比 Web 套壳方式性能体验好
-- 🩴 **简**：很轻巧，纯编辑器输入体验，众多快捷键助你快人一步
+- 🏂 **妙**：纯本地使用、安全、语法高亮、黑暗模式、源文件保存、国际化、演示模式、[PPT 模式](#妙言-ppt)、单独编辑模式、文档自动排版、文档导出、内部跳转、图床、LaTeX、Mermaid、PlantUML、Markmap 脑图
+- 🎊 **美**：极简的设计风格，文件夹 + 文件列表 + 编辑器方式 3 列模式
+- 🚄 **快**：使用 Swift5 原生开发，相比 Web 套壳方式性能体验好
+- 🥛 **简**：很轻巧，纯编辑器输入体验，众多快捷键助你快人一步
 
 ## 首次使用
 
-1. 从 <a href="https://github.com/tw93/MiaoYan/releases" target="_blank">GitHub Releases</a> 中 **下载** 最新的 dmg 安装包，如安装出现问题请参考 [文档](https://zhuanlan.zhihu.com/p/135948430)，此外也支持从 `brew install miaoyan --cask` 安装。
+1. 从 <a href="https://github.com/tw93/MiaoYan/releases" target="_blank">GitHub Releases</a> 中 **下载** 最新的 dmg 安装包，macOS Big Sur 及以上版本体验更好，如安装出现问题请参考 [文档](https://zhuanlan.zhihu.com/p/135948430)，此外也支持从 `brew install miaoyan --cask` 安装。
 2. 可以在 iCloud 或根目录下创建一个 `MiaoYan` 的文件夹，打开妙言的设置，将默认存储地址修改成这个。
 3. 点击妙言左上角新增文件夹的图标，创建好自己的文档分类文件夹，就可以开始使用了。
 4. 同样假如你不习惯默认的字体，可以在设置中修改成其他的正常字体。
@@ -85,12 +85,12 @@
 - <a href="https://github.com/raspu/Highlightr" target="_blank">raspu/Highlightr</a>：语法高亮能力
 - <a href="https://github.com/glushchenko/fsnotes" target="_blank">glushchenko/fsnotes</a>：妙言有部分初始化代码来源于此
 - <a href="https://github.com/lxgw/LxgwWenKai" target="_blank">lxgw/LxgwWenKai</a>：一款漂亮的开源中文字体，妙言将其作为默认字体
-- <a href="https://github.com/sivan/heti" target="_blank">sivan/heti</a>：专为中文内容展示设计的排版样式增强
+- <a href="https://github.com/michaelhenry/Prettier.swift" target="_blank">michaelhenry/Prettier.swift</a>：妙言格式化能力升级成 Prettier 的思路来源
 - <a href="https://github.com/hakimel/reveal.js" target="_blank">hakimel/reveal.js</a>：妙言 PPT 底层渲染依赖此框架
 - 感谢 Vercel 给妙言 [官网](https://miaoyan.app/) 提供静态渲染能力  
     <a href="https://vercel.com?utm_source=tw93&utm_campaign=oss"><img
         src=https://gw.alipayobjects.com/zos/k/wr/powered-by-vercel.svg
-        width="148px"/></a>
+        width="118px"/></a>
 
 # 协议
 

@@ -17,6 +17,8 @@ class EditTextView: NSTextView, NSTextFinderClient {
     let storage = Storage.sharedInstance()
     let caretWidth: CGFloat = 1
     var downView: MarkdownView?
+    var initRange = NSRange(location: 0, length: 0)
+
     public var timer: Timer?
     public var markdownView: MPreviewView?
     public static var imagesLoaderQueue = OperationQueue()
@@ -33,9 +35,9 @@ class EditTextView: NSTextView, NSTextFinderClient {
         var newRect = NSRect(origin: rect.origin, size: rect.size)
         newRect.size.width = caretWidth
         if let range = getParagraphRange(), range.upperBound != textStorage?.length || (
-            range.upperBound == textStorage?.length
-                && textStorage?.string.last == "\n"
-                && selectedRange().location != textStorage?.length
+                range.upperBound == textStorage?.length
+                        && textStorage?.string.last == "\n"
+                        && selectedRange().location != textStorage?.length
         ) {
             newRect.size.height = newRect.size.height - 6.0
             newRect.origin.y = newRect.origin.y + 4.0
@@ -48,6 +50,12 @@ class EditTextView: NSTextView, NSTextFinderClient {
     }
 
     override func updateInsertionPointStateAndRestartTimer(_ restartFlag: Bool) {
+        if let range = selectedRanges[0] as? NSRange, range.length > 0, range != initRange {
+            DispatchQueue.main.async {
+                self.textStorage?.updateParagraphStyle()
+                self.initRange = range
+            }
+        }
         super.updateInsertionPointStateAndRestartTimer(true)
     }
 
@@ -56,6 +64,8 @@ class EditTextView: NSTextView, NSTextFinderClient {
         newInvalidRect.size.width += caretWidth - 1
         super.setNeedsDisplay(newInvalidRect)
     }
+
+    override var acceptableDragTypes: [NSPasteboard.PasteboardType] { [] }
 
     override func mouseDown(with event: NSEvent) {
         guard EditTextView.note != nil else { return }
@@ -69,12 +79,20 @@ class EditTextView: NSTextView, NSTextFinderClient {
 
         _ = manager.boundingRect(forGlyphRange: NSRange(location: index, length: 1), in: container)
 
-        super.mouseDown(with: event)
         saveCursorPosition()
 
         if !UserDefaultsManagement.preview {
             isEditable = true
         }
+
+        if initRange.length > 0 {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                self.textStorage?.updateParagraphStyle()
+                self.initRange = NSRange(location: 0, length: 0)
+            }
+        }
+
+        super.mouseDown(with: event)
     }
 
     override func mouseMoved(with event: NSEvent) {
@@ -114,14 +132,13 @@ class EditTextView: NSTextView, NSTextFinderClient {
     override func willOpenMenu(_ menu: NSMenu, with event: NSEvent) {
         for menuItem in menu.items {
             if menuItem.identifier?.rawValue == "_searchWithGoogleFromMenu:" ||
-                menuItem.identifier?.rawValue == "__NSTextViewContextSubmenuIdentifierSpellingAndGrammar" ||
-                menuItem.identifier?.rawValue == "__NSTextViewContextSubmenuIdentifierSubstitutions" ||
-                menuItem.identifier?.rawValue == "__NSTextViewContextSubmenuIdentifierTransformations" ||
-                menuItem.identifier?.rawValue == "_NS:290" ||
-                menuItem.identifier?.rawValue == "_NS:291" ||
-                menuItem.identifier?.rawValue == "_NS:328" ||
-                menuItem.identifier?.rawValue == "_NS:353"
-            {
+                       menuItem.identifier?.rawValue == "__NSTextViewContextSubmenuIdentifierSpellingAndGrammar" ||
+                       menuItem.identifier?.rawValue == "__NSTextViewContextSubmenuIdentifierSubstitutions" ||
+                       menuItem.identifier?.rawValue == "__NSTextViewContextSubmenuIdentifierTransformations" ||
+                       menuItem.identifier?.rawValue == "_NS:290" ||
+                       menuItem.identifier?.rawValue == "_NS:291" ||
+                       menuItem.identifier?.rawValue == "_NS:328" ||
+                       menuItem.identifier?.rawValue == "_NS:353" {
                 menuItem.isHidden = true
             }
         }
@@ -190,9 +207,7 @@ class EditTextView: NSTextView, NSTextFinderClient {
             breakUndoCoalescing()
 
             saveTextStorageContent(to: note)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.0001) {
-                self.fillHighlightLinks()
-            }
+            fillHighlightLinks()
             return
         }
 
@@ -222,8 +237,7 @@ class EditTextView: NSTextView, NSTextFinderClient {
 
             if let note = EditTextView.note,
                let imageData = textAttachment.fileWrapper?.regularFileContents,
-               let path = ImagesProcessor.writeFile(data: imageData, note: note)
-            {
+               let path = ImagesProcessor.writeFile(data: imageData, note: note) {
                 storage.addAttribute(filePathKey, value: path, range: range)
             }
         }
@@ -234,7 +248,8 @@ class EditTextView: NSTextView, NSTextFinderClient {
               let editArea = vc.editArea,
               let note = EditTextView.note,
               !UserDefaultsManagement.preview,
-              editArea.hasFocus() else { return }
+              editArea.hasFocus()
+        else { return }
 
         let formatter = TextFormatter(textView: editArea, note: note)
         formatter.bold()
@@ -245,7 +260,8 @@ class EditTextView: NSTextView, NSTextFinderClient {
               let editArea = vc.editArea,
               let note = EditTextView.note,
               !UserDefaultsManagement.preview,
-              editArea.hasFocus() else { return }
+              editArea.hasFocus()
+        else { return }
 
         let formatter = TextFormatter(textView: editArea, note: note)
         formatter.italic()
@@ -256,7 +272,8 @@ class EditTextView: NSTextView, NSTextFinderClient {
               let editArea = vc.editArea,
               let note = EditTextView.note,
               !UserDefaultsManagement.preview,
-              editArea.hasFocus() else { return }
+              editArea.hasFocus()
+        else { return }
 
         let formatter = TextFormatter(textView: editArea, note: note)
         formatter.link()
@@ -267,7 +284,8 @@ class EditTextView: NSTextView, NSTextFinderClient {
               let editArea = vc.editArea,
               let note = EditTextView.note,
               !UserDefaultsManagement.preview,
-              editArea.hasFocus() else { return }
+              editArea.hasFocus()
+        else { return }
 
         let formatter = TextFormatter(textView: editArea, note: note)
         formatter.underline()
@@ -278,7 +296,8 @@ class EditTextView: NSTextView, NSTextFinderClient {
               let editArea = vc.editArea,
               let note = EditTextView.note,
               !UserDefaultsManagement.preview,
-              editArea.hasFocus() else { return }
+              editArea.hasFocus()
+        else { return }
 
         let formatter = TextFormatter(textView: editArea, note: note)
         formatter.deleteline()
@@ -316,7 +335,7 @@ class EditTextView: NSTextView, NSTextFinderClient {
         return true
     }
 
-    func fill(note: Note, highlight: Bool = false, saveTyping: Bool = false, force: Bool = false) {
+    func fill(note: Note, highlight: Bool = false, saveTyping: Bool = false, force: Bool = false, needScrollToCursor: Bool = true) {
         let viewController = window?.contentViewController as! ViewController
         viewController.emptyEditAreaView.isHidden = true
         viewController.titleBarView.isHidden = false
@@ -329,8 +348,7 @@ class EditTextView: NSTextView, NSTextFinderClient {
         undoManager?.removeAllActions(withTarget: self)
 
         if let appd = NSApplication.shared.delegate as? AppDelegate,
-           let md = appd.mainWindowController
-        {
+           let md = appd.mainWindowController {
             md.editorUndoManager = note.undoManager
         }
 
@@ -383,7 +401,7 @@ class EditTextView: NSTextView, NSTextFinderClient {
             isHighlighted = true
         }
         applyLeftParagraphStyle()
-        restoreCursorPosition()
+        restoreCursorPosition(needScrollToCursor: needScrollToCursor)
     }
 
     private func setTextColor() {
@@ -494,14 +512,15 @@ class EditTextView: NSTextView, NSTextFinderClient {
 
     override func keyDown(with event: NSEvent) {
         guard !(
-            event.modifierFlags.contains(.shift) &&
-                [
-                    kVK_UpArrow,
-                    kVK_DownArrow,
-                    kVK_LeftArrow,
-                    kVK_RightArrow
-                ].contains(Int(event.keyCode))
-        ) else {
+                event.modifierFlags.contains(.shift) &&
+                        [
+                            kVK_UpArrow,
+                            kVK_DownArrow,
+                            kVK_LeftArrow,
+                            kVK_RightArrow
+                        ].contains(Int(event.keyCode))
+        )
+        else {
             super.keyDown(with: event)
             return
         }
@@ -526,20 +545,18 @@ class EditTextView: NSTextView, NSTextFinderClient {
             formatter.newLine()
             breakUndoCoalescing()
             fillHighlightLinks()
+            saveCursorPosition()
             return
-        }
-
-        if event.keyCode == kVK_Delete {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.0001) {
-                self.fillHighlightLinks()
-            }
         }
 
         if event.keyCode == kVK_Delete, event.modifierFlags.contains(.option) {
             deleteWordBackward(nil)
             return
         }
+
         super.keyDown(with: event)
+
+        fillHighlightLinks()
         saveCursorPosition()
     }
 
@@ -560,8 +577,8 @@ class EditTextView: NSTextView, NSTextFinderClient {
 
             typingAttributes.removeValue(forKey: .todo)
 
-            if let paragraphStyle = typingAttributes[.paragraphStyle] as? NSMutableParagraphStyle {
-                paragraphStyle.alignment = .left
+            if typingAttributes[.paragraphStyle] is NSMutableParagraphStyle {
+                applyLeftParagraphStyle()
             }
 
             if textStorage?.length == 0 {
@@ -594,7 +611,7 @@ class EditTextView: NSTextView, NSTextFinderClient {
         try? note.url.setExtendedAttribute(data: data, forName: "com.tw93.miaoyan.cursor")
     }
 
-    func restoreCursorPosition() {
+    func restoreCursorPosition(needScrollToCursor: Bool = true) {
         guard let storage = textStorage else { return }
 
         guard UserDefaultsManagement.restoreCursorPosition else {
@@ -604,7 +621,9 @@ class EditTextView: NSTextView, NSTextFinderClient {
 
         if let position = EditTextView.note?.getCursorPosition(), position <= storage.length {
             setSelectedRange(NSMakeRange(position, 0))
-            scrollToCursor()
+            if needScrollToCursor {
+                scrollToCursor()
+            }
         }
     }
 
@@ -614,9 +633,9 @@ class EditTextView: NSTextView, NSTextFinderClient {
         let string = storage.attributedSubstring(from: NSRange(0..<storage.length))
 
         note.content =
-            NSMutableAttributedString(attributedString: string)
-                .unLoadImages()
-                .unLoadCheckboxes()
+                NSMutableAttributedString(attributedString: string)
+                        .unLoadImages()
+                        .unLoadCheckboxes()
     }
 
     func setEditorTextColor(_ color: NSColor) {
@@ -650,8 +669,7 @@ class EditTextView: NSTextView, NSTextFinderClient {
         if let data = board.data(forType: .rtfd),
            let text = NSAttributedString(rtfd: data, documentAttributes: nil),
            text.length > 0,
-           range.length > 0
-        {
+           range.length > 0 {
             insertText("", replacementRange: range)
 
             let dropPoint = convert(sender.draggingLocation, from: nil)
@@ -678,9 +696,9 @@ class EditTextView: NSTextView, NSTextFinderClient {
             let positionKey = NSAttributedString.Key(rawValue: "com.tw93.miaoyan.image.position")
 
             guard
-                let path = attributedText.attribute(filePathKey, at: 0, effectiveRange: nil) as? String,
-                let title = attributedText.attribute(titleKey, at: 0, effectiveRange: nil) as? String,
-                let position = attributedText.attribute(positionKey, at: 0, effectiveRange: nil) as? Int
+                    let path = attributedText.attribute(filePathKey, at: 0, effectiveRange: nil) as? String,
+                    let title = attributedText.attribute(titleKey, at: 0, effectiveRange: nil) as? String,
+                    let position = attributedText.attribute(positionKey, at: 0, effectiveRange: nil) as? Int
             else { return false }
 
             guard let imageUrl = note.getImageUrl(imageName: path) else { return false }
@@ -703,8 +721,7 @@ class EditTextView: NSTextView, NSTextFinderClient {
         }
 
         if let urls = board.readObjects(forClasses: [NSURL.self], options: nil) as? [URL],
-           urls.count > 0
-        {
+           urls.count > 0 {
             let dropPoint = convert(sender.draggingLocation, from: nil)
             let caretLocation = characterIndexForInsertion(at: dropPoint)
             let offset = 0
@@ -912,10 +929,7 @@ class EditTextView: NSTextView, NSTextFinderClient {
     }
 
     public func applyLeftParagraphStyle() {
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = CGFloat(UserDefaultsManagement.editorLineSpacing)
-        paragraphStyle.alignment = .left
-        paragraphStyle.lineHeightMultiple = CGFloat(UserDefaultsManagement.editorLineHeight)
+        let paragraphStyle = NSTextStorage.getParagraphStyle()
         typingAttributes[.paragraphStyle] = paragraphStyle
         defaultParagraphStyle = paragraphStyle
         textStorage?.updateParagraphStyle()
@@ -938,7 +952,7 @@ class EditTextView: NSTextView, NSTextFinderClient {
         viewDelegate?.refillEditArea()
     }
 
-    private func fillHighlightLinks() {
+    public func fillHighlightLinks() {
         guard let storage = textStorage else { return }
 
         let range = NSRange(0..<storage.length)

@@ -21,20 +21,31 @@ public extension NSTextStorage {
         endEditing()
     }
 
+    static func getParagraphStyle() -> NSMutableParagraphStyle {
+        let paragraphStyle = NSMutableParagraphStyle()
+        let fontSize = UserDefaultsManagement.fontSize
+
+        // 优先使用默认的
+        let editorLineHeight = UserDefaultsManagement.DefaultEditorLineHeight
+        let editorLineSpacing = UserDefaultsManagement.DefaultEditorLineSpacing
+        let lineHeight = CGFloat(editorLineHeight * CGFloat(fontSize)) + editorLineSpacing
+
+        paragraphStyle.alignment = .left
+        paragraphStyle.lineSpacing = editorLineSpacing
+        paragraphStyle.lineHeightMultiple = editorLineHeight
+        paragraphStyle.maximumLineHeight = lineHeight
+        paragraphStyle.minimumLineHeight = lineHeight
+        return paragraphStyle
+    }
+
     func updateParagraphStyle() {
         beginEditing()
-
-        let attachmentParagraph = NSMutableParagraphStyle()
-        attachmentParagraph.lineSpacing = CGFloat(UserDefaultsManagement.editorLineSpacing)
-        attachmentParagraph.alignment = .left
-        attachmentParagraph.lineHeightMultiple = CGFloat(UserDefaultsManagement.editorLineHeight)
-
+        let attachmentParagraph = NSTextStorage.getParagraphStyle()
         mutableString.enumerateSubstrings(in: NSRange(0..<length), options: .byParagraphs) { _, range, _, _ in
             let rangeNewline = range.upperBound == self.length ? range : NSRange(range.location..<range.upperBound + 1)
             self.addAttribute(.paragraphStyle, value: attachmentParagraph, range: rangeNewline)
             self.addAttribute(.kern, value: UserDefaultsManagement.DefaultEditorLetterSpacing, range: rangeNewline)
         }
-
         endEditing()
     }
 

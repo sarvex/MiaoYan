@@ -73,9 +73,15 @@ class PreferencesGeneralViewController: NSViewController {
             return
         }
 
+        // 处理好代码字体变化
+        if UserDefaultsManagement.codeFontName == UserDefaultsManagement.fontName {
+            UserDefaultsManagement.codeFontName = item.title
+            NotesTextProcessor.codeFont = Font(name: UserDefaultsManagement.codeFontName, size: CGFloat(UserDefaultsManagement.fontSize))
+        }
+
         UserDefaultsManagement.fontName = item.title
+
         NotesTextProcessor.hl = nil
-        vc.checkDefaultSetting()
         vc.refillEditArea()
         vc.disablePreview()
     }
@@ -311,12 +317,27 @@ class PreferencesGeneralViewController: NSViewController {
     }
 
     private func restart() {
-        let url = URL(fileURLWithPath: Bundle.main.resourcePath!)
-        let path = url.deletingLastPathComponent().deletingLastPathComponent().absoluteString
-        let task = Process()
-        task.launchPath = "/usr/bin/open"
-        task.arguments = [path]
-        task.launch()
-        exit(0)
+        guard let vc = ViewController.shared(), let w = vc.view.window else {
+            return
+        }
+
+        let alert = NSAlert()
+        alert.messageText = NSLocalizedString("Restart to MiaoYan to take effect", comment: "")
+        alert.addButton(withTitle: NSLocalizedString("Confirm", comment: ""))
+        alert.addButton(withTitle: NSLocalizedString("Cancel", comment: ""))
+        alert.beginSheetModal(for: w) { (returnCode: NSApplication.ModalResponse) in
+            if returnCode == NSApplication.ModalResponse.alertFirstButtonReturn {
+                UserDefaultsManagement.isFirstLaunch = true
+                do {
+                    let url = URL(fileURLWithPath: Bundle.main.resourcePath!)
+                    let path = url.deletingLastPathComponent().deletingLastPathComponent().absoluteString
+                    let task = Process()
+                    task.launchPath = "/usr/bin/open"
+                    task.arguments = [path]
+                    task.launch()
+                    exit(0)
+                }
+            }
+        }
     }
 }

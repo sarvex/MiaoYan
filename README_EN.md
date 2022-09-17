@@ -23,14 +23,14 @@
 
 ## Features
 
-- 🪂 **Fantastic**: Local use, security, syntax highlighting, dark mode, source file saving, international, presentation mode, [PPT Mode](#miaoYan-ppt), single edit mode, export file, internal jump, document auto typesetting, picture upload, LaTeX, Mermaid, PlantUML, Markmap.
-- 🐶 **Beauty**: Minimalist design style, folder + file list + editor 3 column mode.
-- 🏌🏽‍♂️ **Fast**: Using Swift5 native development, the performance experience is much better compared to the Web.
-- 🩴 **Simple**: Very light, pure editor input experience, many shortcut keys to help you fast.
+- 🏂 **Fantastic**: Local use, security, syntax highlighting, dark mode, source file saving, international, presentation mode, [PPT Mode](#miaoYan-ppt), single edit mode, export file, internal jump, document auto typesetting, picture upload, LaTeX, Mermaid, PlantUML、Markmap.
+- 🎊 **Beauty**: Minimalist design style, folder + file list + editor 3 column mode.
+- 🚄‍ **Fast**: Using Swift5 native development, the performance experience is much better compared to the Web.
+- 🥛 **Simple**: Very light, pure editor input experience, many shortcut keys to help you fast.
 
 ## First Use
 
-1. **Download** the latest dmg installation package from <a href="https://github.com/tw93/MiaoYan/releases/latest" target="_blank">GitHub Releases</a> and double-click to install it, also support `brew install miaoyan -- cask` installation.
+1. **Download** the latest dmg installation package from <a href="https://github.com/tw93/MiaoYan/releases/latest" target="_blank">GitHub Releases</a> and double-click to install it, macOS Big Sur and above have a better experience. Also support `brew install miaoyan -- cask` installation.
 2. You can create a `MiaoYan` folder in iCloud or the root directory, open MiaoYan's Settings, and change the default storage address to this.
 3. Click icon of the new folder in the upper left corner of MiaoYan, create your own document category folder, and you can start using it.
 4. Similarly, if you are not used to the default font, you can change it to other normal fonts in the settings.
@@ -85,13 +85,12 @@
 - <a href="https://github.com/raspu/Highlightr" target="_blank">raspu/Highlightr</a>: Syntax highlighting capability.
 - <a href="https://github.com/glushchenko/fsnotes" target="_blank">glushchenko/fsnotes</a>: MiaoYan has part of the framework code from this project.
 - <a href="https://github.com/lxgw/LxgwWenKai" target="_blank">lxgw/LxgwWenKai</a>: A beautiful open source chinese font, MiaoYan has made it the default font.
-- <a href="https://github.com/sivan/heti" target="_blank">sivan/heti</a>：Enhanced typography for Chinese content presentation.
+- <a href="https://github.com/michaelhenry/Prettier.swift" target="_blank">michaelhenry/Prettier.swift</a>：MiaoYan document auto typesetting is from Prettier.
 - <a href="https://github.com/hakimel/reveal.js" target="_blank">hakimel/reveal.js</a>：An open source HTML presentation framework.
-- Thanks to Vercel for providing static rendering capability to [MiaoYan](https://miaoyan.app/).
-
+- Thanks to Vercel for providing static rendering capability to [MiaoYan](https://miaoyan.app/).  
     <a href="https://vercel.com?utm_source=tw93&utm_campaign=oss"><img
       src=https://gw.alipayobjects.com/zos/k/wr/powered-by-vercel.svg
-      width="148px"/></a>
+      width="118px"/></a>
 
 # License
 
