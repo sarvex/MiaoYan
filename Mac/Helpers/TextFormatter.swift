@@ -274,8 +274,7 @@ public class TextFormatter {
         // Middle
         if sRange.location != 0 || sRange.location != storage.length,
            paragraph.count == 1,
-           note.isMarkdown()
-        {
+           note.isMarkdown() {
             insertText("\t", replacementRange: sRange)
             return
         }
@@ -358,6 +357,22 @@ public class TextFormatter {
         }
     }
 
+    public func toggleTodo() {
+        guard let currentParagraphRange = getParagraphRange() else { return }
+        let currentParagraph = storage.attributedSubstring(from: currentParagraphRange)
+        let string = currentParagraph.string
+        var todoString = "- [ ] "
+        if string.contains("- [ ] ") {
+            todoString = "- [x] "
+        }
+
+        if string.contains("- [ ] ") || string.contains("- [x] ") {
+            replaceWith(string: todoString, range: NSRange(location: currentParagraphRange.location, length: 6))
+        } else {
+            insertText(todoString, replacementRange: NSRange(location: currentParagraphRange.location, length: 0))
+        }
+    }
+
     public func newLine() {
         guard let currentParagraphRange = getParagraphRange() else { return }
 
@@ -437,8 +452,7 @@ public class TextFormatter {
         }
 
         if currentParagraph.string.starts(with: "  "),
-           let prefix = currentParagraph.string.getPrefixMatchSequentially(char: " ")
-        {
+           let prefix = currentParagraph.string.getPrefixMatchSequentially(char: " ") {
             if selectedRange.location != currentParagraphRange.location {
                 newLine += prefix
             }
@@ -547,8 +561,7 @@ public class TextFormatter {
         if let range = range,
            let start = textView.position(from: textView.beginningOfDocument, offset: range.location),
            let end = textView.position(from: start, offset: range.length),
-           let sRange = textView.textRange(from: start, to: end)
-        {
+           let sRange = textView.textRange(from: start, to: end) {
             selectedRange = sRange
         } else {
             selectedRange = textView.selectedTextRange!
@@ -711,16 +724,6 @@ public class TextFormatter {
         #endif
     }
 
-    public static func getCodeParagraphStyle() -> NSMutableParagraphStyle {
-        let paragraphStyle = NSTextStorage.getParagraphStyle()
-
-        #if os(OSX)
-        paragraphStyle.textBlocks = [CodeBlock()]
-        #endif
-
-        return paragraphStyle
-    }
-
     private func insertText(_ string: Any, replacementRange: NSRange? = nil, selectRange: NSRange? = nil) {
         let range = replacementRange ?? textView.selectedRange
 
@@ -747,8 +750,8 @@ public class TextFormatter {
         let parStyle = NSTextStorage.getParagraphStyle()
 
         textView.textStorage.addAttribute(.paragraphStyle, value: parStyle, range: parRange)
-        textView.textStorage.addAttribute(.kern, value: UserDefaultsManagement.DefaultEditorLetterSpacing, range: parRange)
-        
+        textView.textStorage.addAttribute(.kern, value: UserDefaultsManagement.editorLetterSpacing, range: parRange)
+
         textView.undoManager?.endUndoGrouping()
         #else
         textView.insertText(string, replacementRange: range)

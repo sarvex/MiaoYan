@@ -25,104 +25,89 @@ class PreferencesGeneralViewController: NSViewController {
     @IBOutlet var previewWidth: NSPopUpButton!
     @IBOutlet var codeFontName: NSPopUpButton!
 
+    @IBOutlet var editorFontWidthConstraint: NSLayoutConstraint!
+    @IBOutlet var previewFontWidthConstraint: NSLayoutConstraint!
+    @IBOutlet var windowFontWidthConstraint: NSLayoutConstraint!
+    @IBOutlet var languageFontWidthConstraint: NSLayoutConstraint!
+    @IBOutlet var codeFontWidthConstraint: NSLayoutConstraint!
+
     @IBOutlet var editorLineBreak: NSPopUpButton!
     @IBOutlet var buttonShow: NSPopUpButton!
-
-    // MARK: global variables
+    @IBOutlet var codeBackground: NSPopUpButton!
 
     let storage = Storage.sharedInstance()
 
     override func viewDidLoad() {
+        // 为了隐藏xcode警告的被迫操作
+        editorFontWidthConstraint.constant = 100.0
+        previewFontWidthConstraint.constant = 100.0
+        windowFontWidthConstraint.constant = 100.0
+        languageFontWidthConstraint.constant = 100.0
+        codeFontWidthConstraint.constant = 100.0
         super.viewDidLoad()
     }
 
-    @IBAction func editorLineBreakClick(_ sender: NSPopUpButton) {
-        guard let vc = ViewController.shared() else {
-            return
-        }
-        guard let item = sender.selectedItem else {
-            return
-        }
-        UserDefaultsManagement.editorLineBreak = item.title
+    func refreshEditor() {
+        guard let vc = ViewController.shared() else { return }
         NotesTextProcessor.hl = nil
-
         vc.disablePreview()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            vc.refillEditArea()
+        }
+    }
+
+    func refreshPreview() {
+        guard let vc = ViewController.shared() else { return }
+        if UserDefaultsManagement.preview { vc.disablePreview() }
         vc.enablePreview()
     }
 
+    @IBAction func editorLineBreakClick(_ sender: NSPopUpButton) {
+        guard let item = sender.selectedItem else { return }
+        UserDefaultsManagement.editorLineBreak = item.title
+        refreshPreview()
+    }
+
     @IBAction func editorFontSizeClick(_ sender: NSPopUpButton) {
-        guard let vc = ViewController.shared() else {
-            return
-        }
-        guard let item = sender.selectedItem else {
-            return
-        }
-
+        guard let item = sender.selectedItem else { return }
         UserDefaultsManagement.fontSize = Int(item.title) ?? UserDefaultsManagement.DefaultFontSize
-
-        NotesTextProcessor.hl = nil
-        vc.refillEditArea()
-        vc.disablePreview()
+        refreshEditor()
     }
 
     @IBAction func editorFontNameClick(_ sender: NSPopUpButton) {
-        guard let vc = ViewController.shared() else {
-            return
-        }
-        guard let item = sender.selectedItem else {
-            return
-        }
+        guard let item = sender.selectedItem else { return }
 
         // 处理好代码字体变化
         if UserDefaultsManagement.codeFontName == UserDefaultsManagement.fontName {
             UserDefaultsManagement.codeFontName = item.title
             NotesTextProcessor.codeFont = Font(name: UserDefaultsManagement.codeFontName, size: CGFloat(UserDefaultsManagement.fontSize))
         }
-
         UserDefaultsManagement.fontName = item.title
-
-        NotesTextProcessor.hl = nil
-        vc.refillEditArea()
-        vc.disablePreview()
+        refreshEditor()
     }
 
     @IBAction func buttonShow(_ sender: NSPopUpButton) {
-        guard let item = sender.selectedItem else {
-            return
-        }
-
-        if UserDefaultsManagement.buttonShow == item.title {
-            return
-        }
-
+        guard let item = sender.selectedItem else { return }
         UserDefaultsManagement.buttonShow = item.title
-
         NotesTextProcessor.hl = nil
         restart()
     }
 
+    @IBAction func codeBackground(_ sender: NSPopUpButton) {
+        guard let item = sender.selectedItem else { return }
+        UserDefaultsManagement.codeBackground = item.title
+        refreshEditor()
+    }
+
     @IBAction func windowFontNameClick(_ sender: NSPopUpButton) {
-        guard let item = sender.selectedItem else {
-            return
-        }
-
-        if UserDefaultsManagement.windowFontName == item.title {
-            return
-        }
-
+        guard let item = sender.selectedItem else { return }
+        if UserDefaultsManagement.windowFontName == item.title { return }
         UserDefaultsManagement.windowFontName = item.title
-
-        NotesTextProcessor.hl = nil
         restart()
     }
 
     @IBAction func codeFontNameClick(_ sender: NSPopUpButton) {
-        guard let vc = ViewController.shared() else {
-            return
-        }
-        guard let item = sender.selectedItem else {
-            return
-        }
+        guard let item = sender.selectedItem else { return }
         if item.title == "Editor Font" {
             UserDefaultsManagement.codeFontName = UserDefaultsManagement.fontName
         } else {
@@ -130,69 +115,31 @@ class PreferencesGeneralViewController: NSViewController {
         }
 
         NotesTextProcessor.codeFont = Font(name: UserDefaultsManagement.codeFontName, size: CGFloat(UserDefaultsManagement.fontSize))
-        NotesTextProcessor.hl = nil
-        vc.disablePreview()
-        vc.refillEditArea(force: true)
+        refreshEditor()
     }
 
     @IBAction func previewWidthClick(_ sender: NSPopUpButton) {
-        guard let vc = ViewController.shared() else {
-            return
-        }
-        guard let item = sender.selectedItem else {
-            return
-        }
+        guard let item = sender.selectedItem else { return }
         UserDefaultsManagement.previewWidth = item.title
-        NotesTextProcessor.hl = nil
-
-        vc.disablePreview()
-        vc.enablePreview()
+        refreshPreview()
     }
 
     @IBAction func previewLocation(_ sender: NSPopUpButton) {
-        guard let vc = ViewController.shared() else {
-            return
-        }
-        guard let item = sender.selectedItem else {
-            return
-        }
-
+        guard let item = sender.selectedItem else { return }
         UserDefaultsManagement.previewLocation = item.title
-
-        NotesTextProcessor.hl = nil
-
-        vc.disablePreview()
-        vc.enablePreview()
+        refreshPreview()
     }
 
     @IBAction func previewFontNameClick(_ sender: NSPopUpButton) {
-        guard let vc = ViewController.shared() else {
-            return
-        }
-        guard let item = sender.selectedItem else {
-            return
-        }
-
+        guard let item = sender.selectedItem else { return }
         UserDefaultsManagement.previewFontName = item.title
-
-        NotesTextProcessor.hl = nil
-
-        vc.disablePreview()
-        vc.enablePreview()
+        refreshPreview()
     }
 
     @IBAction func previewFontSizeClick(_ sender: NSPopUpButton) {
-        guard let vc = ViewController.shared() else {
-            return
-        }
-        guard let item = sender.selectedItem else {
-            return
-        }
-
+        guard let item = sender.selectedItem else { return }
         UserDefaultsManagement.previewFontSize = Int(item.title) ?? UserDefaultsManagement.DefaultPreviewFontSize
-
-        vc.disablePreview()
-        vc.enablePreview()
+        refreshPreview()
     }
 
     @IBAction func presentationFontSizeClick(_ sender: NSPopUpButton) {
@@ -211,9 +158,7 @@ class PreferencesGeneralViewController: NSViewController {
 
     @IBAction func appearanceClick(_ sender: NSPopUpButton) {
         if let type = AppearanceType(rawValue: sender.indexOfSelectedItem) {
-            if UserDefaultsManagement.appearanceType == type {
-                return
-            }
+            if UserDefaultsManagement.appearanceType == type { return }
             UserDefaultsManagement.appearanceType = type
         }
         restart()
@@ -257,6 +202,7 @@ class PreferencesGeneralViewController: NSViewController {
         picPopUp.selectItem(withTitle: String(UserDefaultsManagement.defaultPicUpload))
         editorLineBreak.selectItem(withTitle: String(UserDefaultsManagement.editorLineBreak))
         buttonShow.selectItem(withTitle: String(UserDefaultsManagement.buttonShow))
+        codeBackground.selectItem(withTitle: String(UserDefaultsManagement.codeBackground))
 
         if UserDefaultsManagement.codeFontName == UserDefaultsManagement.fontName {
             codeFontName.selectItem(withTitle: "Editor Font")
@@ -310,17 +256,13 @@ class PreferencesGeneralViewController: NSViewController {
             return
         }
         UserDefaultsManagement.defaultLanguage = type.rawValue
-
         UserDefaults.standard.set([type.code], forKey: "AppleLanguages")
         UserDefaults.standard.synchronize()
         restart()
     }
 
     private func restart() {
-        guard let vc = ViewController.shared(), let w = vc.view.window else {
-            return
-        }
-
+        guard let vc = ViewController.shared(), let w = vc.view.window else { return }
         let alert = NSAlert()
         alert.messageText = NSLocalizedString("Restart to MiaoYan to take effect", comment: "")
         alert.addButton(withTitle: NSLocalizedString("Confirm", comment: ""))
@@ -328,14 +270,16 @@ class PreferencesGeneralViewController: NSViewController {
         alert.beginSheetModal(for: w) { (returnCode: NSApplication.ModalResponse) in
             if returnCode == NSApplication.ModalResponse.alertFirstButtonReturn {
                 UserDefaultsManagement.isFirstLaunch = true
-                do {
-                    let url = URL(fileURLWithPath: Bundle.main.resourcePath!)
-                    let path = url.deletingLastPathComponent().deletingLastPathComponent().absoluteString
-                    let task = Process()
-                    task.launchPath = "/usr/bin/open"
-                    task.arguments = [path]
-                    task.launch()
-                    exit(0)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    do {
+                        let url = URL(fileURLWithPath: Bundle.main.resourcePath!)
+                        let path = url.deletingLastPathComponent().deletingLastPathComponent().absoluteString
+                        let task = Process()
+                        task.launchPath = "/usr/bin/open"
+                        task.arguments = [path]
+                        task.launch()
+                        exit(0)
+                    }
                 }
             }
         }

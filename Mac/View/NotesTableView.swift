@@ -3,8 +3,7 @@ import Cocoa
 import MiaoYanCore_macOS
 
 class NotesTableView: NSTableView, NSTableViewDataSource,
-    NSTableViewDelegate
-{
+    NSTableViewDelegate {
     var noteList = [Note]()
     var defaultCell = NoteCellView()
     var pinnedCell = NoteCellView()
@@ -161,7 +160,6 @@ class NotesTableView: NSTableView, NSTableViewDataSource,
                     guard !operation.isCancelled, self?.fillTimestamp == timestamp else {
                         return
                     }
-
                     vc.editArea.fill(note: note, highlight: true)
                 }
             }

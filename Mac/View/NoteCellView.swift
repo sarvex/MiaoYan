@@ -21,7 +21,6 @@ class NoteCellView: NSTableCellView {
         if let originY = UserDefaultsManagement.cellViewFrameOriginY {
             adjustTopMargin(margin: originY)
         }
-
         super.viewWillDraw()
     }
 
@@ -29,12 +28,15 @@ class NoteCellView: NSTableCellView {
         super.draw(dirtyRect)
 
         renderPin()
-        udpateSelectionHighlight()
-
         pin.frame.origin.y = CGFloat(-4) + CGFloat(cellSpacing) + CGFloat(0)
+        
+        updateSelectionHighlight()
 
         name.font = UserDefaultsManagement.nameFont
         date.font = UserDefaultsManagement.dateFont
+
+        name.addCharacterSpacing()
+        date.addCharacterSpacing()
     }
 
     public func configure(note: Note) {
@@ -42,23 +44,23 @@ class NoteCellView: NSTableCellView {
     }
 
     // This NoteCellView has multiple contained views; this method changes
+
     // these views' color when the cell is selected.
     override var backgroundStyle: NSView.BackgroundStyle {
         set {
-            udpateSelectionHighlight()
+            updateSelectionHighlight()
         }
         get {
             super.backgroundStyle
         }
     }
 
-    public func udpateSelectionHighlight() {
+    public func updateSelectionHighlight() {
         if backgroundStyle == NSView.BackgroundStyle.dark {
             date.textColor = NSColor.white
             name.textColor = NSColor.white
         } else {
             date.textColor = labelColor
-
             if #available(OSX 10.13, *) {
                 name.textColor = NSColor(named: "mainText")
             } else {
@@ -126,13 +128,13 @@ class NoteCellView: NSTableCellView {
            let sidebarItem = viewController.getSidebarItem(),
            let sort = sidebarItem.project?.sortBy,
            sort == .creationDate,
-           let date = note.getCreationDateForLabel()
-        {
+           let date = note.getCreationDateForLabel() {
             self.date.stringValue = date
         } else {
             date.stringValue = note.getDateForLabel()
         }
-
-        udpateSelectionHighlight()
+        updateSelectionHighlight()
+        name.addCharacterSpacing()
+        date.addCharacterSpacing()
     }
 }

@@ -34,29 +34,29 @@ class EditTextView: NSTextView, NSTextFinderClient {
     override func drawInsertionPoint(in rect: NSRect, color: NSColor, turnedOn flag: Bool) {
         var newRect = NSRect(origin: rect.origin, size: rect.size)
         newRect.size.width = caretWidth
+        var diff = 4.0
         if let range = getParagraphRange(), range.upperBound != textStorage?.length || (
-                range.upperBound == textStorage?.length
-                        && textStorage?.string.last == "\n"
-                        && selectedRange().location != textStorage?.length
+            range.upperBound == textStorage?.length
+                && textStorage?.string.last == "\n"
+                && selectedRange().location != textStorage?.length
         ) {
-            newRect.size.height = newRect.size.height - 6.0
-            newRect.origin.y = newRect.origin.y + 4.0
-        } else {
-            newRect.size.height = newRect.size.height - 4.0
-            newRect.origin.y = newRect.origin.y + 4.0
+            diff = 6.0
         }
+
+        newRect.size.height = newRect.size.height - diff
+        newRect.origin.y = newRect.origin.y + 4.0
 
         super.drawInsertionPoint(in: newRect, color: EditTextView.fontColor, turnedOn: flag)
     }
 
     override func updateInsertionPointStateAndRestartTimer(_ restartFlag: Bool) {
+        super.updateInsertionPointStateAndRestartTimer(true)
         if let range = selectedRanges[0] as? NSRange, range.length > 0, range != initRange {
             DispatchQueue.main.async {
                 self.textStorage?.updateParagraphStyle()
                 self.initRange = range
             }
         }
-        super.updateInsertionPointStateAndRestartTimer(true)
     }
 
     override func setNeedsDisplay(_ invalidRect: NSRect) {
@@ -79,6 +79,8 @@ class EditTextView: NSTextView, NSTextFinderClient {
 
         _ = manager.boundingRect(forGlyphRange: NSRange(location: index, length: 1), in: container)
 
+        super.mouseDown(with: event)
+
         saveCursorPosition()
 
         if !UserDefaultsManagement.preview {
@@ -86,13 +88,11 @@ class EditTextView: NSTextView, NSTextFinderClient {
         }
 
         if initRange.length > 0 {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+            DispatchQueue.main.async {
                 self.textStorage?.updateParagraphStyle()
                 self.initRange = NSRange(location: 0, length: 0)
             }
         }
-
-        super.mouseDown(with: event)
     }
 
     override func mouseMoved(with event: NSEvent) {
@@ -132,13 +132,13 @@ class EditTextView: NSTextView, NSTextFinderClient {
     override func willOpenMenu(_ menu: NSMenu, with event: NSEvent) {
         for menuItem in menu.items {
             if menuItem.identifier?.rawValue == "_searchWithGoogleFromMenu:" ||
-                       menuItem.identifier?.rawValue == "__NSTextViewContextSubmenuIdentifierSpellingAndGrammar" ||
-                       menuItem.identifier?.rawValue == "__NSTextViewContextSubmenuIdentifierSubstitutions" ||
-                       menuItem.identifier?.rawValue == "__NSTextViewContextSubmenuIdentifierTransformations" ||
-                       menuItem.identifier?.rawValue == "_NS:290" ||
-                       menuItem.identifier?.rawValue == "_NS:291" ||
-                       menuItem.identifier?.rawValue == "_NS:328" ||
-                       menuItem.identifier?.rawValue == "_NS:353" {
+                menuItem.identifier?.rawValue == "__NSTextViewContextSubmenuIdentifierSpellingAndGrammar" ||
+                menuItem.identifier?.rawValue == "__NSTextViewContextSubmenuIdentifierSubstitutions" ||
+                menuItem.identifier?.rawValue == "__NSTextViewContextSubmenuIdentifierTransformations" ||
+                menuItem.identifier?.rawValue == "_NS:290" ||
+                menuItem.identifier?.rawValue == "_NS:291" ||
+                menuItem.identifier?.rawValue == "_NS:328" ||
+                menuItem.identifier?.rawValue == "_NS:353" {
                 menuItem.isHidden = true
             }
         }
@@ -201,13 +201,12 @@ class EditTextView: NSTextView, NSTextFinderClient {
             EditTextView.shouldForceRescan = true
 
             let currentRange = selectedRange()
-
             breakUndoCoalescing()
             insertText(clipboard, replacementRange: currentRange)
             breakUndoCoalescing()
-
             saveTextStorageContent(to: note)
             fillHighlightLinks()
+            applyLeftParagraphStyle()
             return
         }
 
@@ -233,6 +232,13 @@ class EditTextView: NSTextView, NSTextFinderClient {
 
             if (storage.attribute(filePathKey, at: range.location, effectiveRange: nil) as? String) != nil {
                 return
+            }
+
+            // 防止文件其实是一个文件夹的场景
+            if let url = NSURL(from: NSPasteboard.general), let ext = url.pathExtension {
+                if !url.isFileURL || ["app", "xcodeproj", "screenflow", "xcworkspace", "bundle", "lproj"].firstIndex(where: { $0 == ext })! > -1 {
+                    return
+                }
             }
 
             if let note = EditTextView.note,
@@ -277,6 +283,17 @@ class EditTextView: NSTextView, NSTextFinderClient {
 
         let formatter = TextFormatter(textView: editArea, note: note)
         formatter.link()
+    }
+
+    @IBAction func todoMenu(_ sender: Any) {
+        guard let vc = ViewController.shared(),
+              let editArea = vc.editArea,
+              let note = EditTextView.note,
+              !UserDefaultsManagement.preview,
+              editArea.hasFocus()
+        else { return }
+        let formatter = TextFormatter(textView: editArea, note: note, shouldScanMarkdown: false)
+        formatter.toggleTodo()
     }
 
     @IBAction func underlineMenu(_ sender: Any) {
@@ -392,14 +409,14 @@ class EditTextView: NSTextView, NSTextFinderClient {
             storage.setAttributedString(note.content)
         }
 
-        fillHighlightLinks()
-
         if highlight {
             let search = getSearchText()
             let processor = NotesTextProcessor(storage: storage)
             processor.highlightKeyword(search: search)
             isHighlighted = true
         }
+
+        fillHighlightLinks()
         applyLeftParagraphStyle()
         restoreCursorPosition(needScrollToCursor: needScrollToCursor)
     }
@@ -512,13 +529,13 @@ class EditTextView: NSTextView, NSTextFinderClient {
 
     override func keyDown(with event: NSEvent) {
         guard !(
-                event.modifierFlags.contains(.shift) &&
-                        [
-                            kVK_UpArrow,
-                            kVK_DownArrow,
-                            kVK_LeftArrow,
-                            kVK_RightArrow
-                        ].contains(Int(event.keyCode))
+            event.modifierFlags.contains(.shift) &&
+                [
+                    kVK_UpArrow,
+                    kVK_DownArrow,
+                    kVK_LeftArrow,
+                    kVK_RightArrow
+                ].contains(Int(event.keyCode))
         )
         else {
             super.keyDown(with: event)
@@ -542,7 +559,12 @@ class EditTextView: NSTextView, NSTextFinderClient {
         if event.keyCode == kVK_Return, !hasMarkedText() {
             breakUndoCoalescing()
             let formatter = TextFormatter(textView: self, note: note, shouldScanMarkdown: false)
-            formatter.newLine()
+            // 对于有shift的直接回车
+            if event.modifierFlags.contains(.shift) {
+                insertNewline(nil)
+            } else {
+                formatter.newLine()
+            }
             breakUndoCoalescing()
             fillHighlightLinks()
             saveCursorPosition()
@@ -576,10 +598,6 @@ class EditTextView: NSTextView, NSTextFinderClient {
             deleteUnusedImages(checkRange: affectedCharRange)
 
             typingAttributes.removeValue(forKey: .todo)
-
-            if typingAttributes[.paragraphStyle] is NSMutableParagraphStyle {
-                applyLeftParagraphStyle()
-            }
 
             if textStorage?.length == 0 {
                 typingAttributes[.foregroundColor] = UserDataService.instance.isDark ? NSColor.white : NSColor.black
@@ -633,9 +651,9 @@ class EditTextView: NSTextView, NSTextFinderClient {
         let string = storage.attributedSubstring(from: NSRange(0..<storage.length))
 
         note.content =
-                NSMutableAttributedString(attributedString: string)
-                        .unLoadImages()
-                        .unLoadCheckboxes()
+            NSMutableAttributedString(attributedString: string)
+                .unLoadImages()
+                .unLoadCheckboxes()
     }
 
     func setEditorTextColor(_ color: NSColor) {
@@ -696,9 +714,9 @@ class EditTextView: NSTextView, NSTextFinderClient {
             let positionKey = NSAttributedString.Key(rawValue: "com.tw93.miaoyan.image.position")
 
             guard
-                    let path = attributedText.attribute(filePathKey, at: 0, effectiveRange: nil) as? String,
-                    let title = attributedText.attribute(titleKey, at: 0, effectiveRange: nil) as? String,
-                    let position = attributedText.attribute(positionKey, at: 0, effectiveRange: nil) as? Int
+                let path = attributedText.attribute(filePathKey, at: 0, effectiveRange: nil) as? String,
+                let title = attributedText.attribute(titleKey, at: 0, effectiveRange: nil) as? String,
+                let position = attributedText.attribute(positionKey, at: 0, effectiveRange: nil) as? Int
             else { return false }
 
             guard let imageUrl = note.getImageUrl(imageName: path) else { return false }
@@ -951,7 +969,6 @@ class EditTextView: NSTextView, NSTextFinderClient {
 
     public func fillHighlightLinks() {
         guard let storage = textStorage else { return }
-
         let range = NSRange(0..<storage.length)
         let processor = NotesTextProcessor(storage: storage, range: range)
         processor.highlightLinks()
@@ -962,7 +979,6 @@ class EditTextView: NSTextView, NSTextFinderClient {
             if !url.isFileURL {
                 return false
             }
-
             return saveFile(url: url as URL, in: note)
         }
 

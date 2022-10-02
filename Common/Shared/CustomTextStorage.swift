@@ -28,7 +28,7 @@ extension NSTextStorage: NSTextStorageDelegate {
         guard let note = EditTextView.note, note.isMarkdown() else { return }
         guard editedRange.length != textStorage.length || EditTextView.shouldForceRescan else { return }
 
-        if shouldScanСompletely(textStorage: textStorage, editedRange: editedRange) {
+        if shouldScanCompletely(textStorage: textStorage, editedRange: editedRange) {
             rescanAll(textStorage: textStorage)
         } else {
             rescanPartial(textStorage: textStorage, delta: delta, editedRange: editedRange)
@@ -40,7 +40,7 @@ extension NSTextStorage: NSTextStorageDelegate {
         EditTextView.lastRemoved = nil
     }
 
-    private func shouldScanСompletely(textStorage: NSTextStorage, editedRange: NSRange) -> Bool {
+    private func shouldScanCompletely(textStorage: NSTextStorage, editedRange: NSRange) -> Bool {
         if editedRange.length == textStorage.length {
             return true
         }
@@ -183,7 +183,7 @@ extension NSTextStorage: NSTextStorageDelegate {
                 let paragraph = NSTextStorage.getParagraphStyle()
 
                 textStorage.addAttribute(.paragraphStyle, value: paragraph, range: range)
-                textStorage.addAttribute(.kern, value: UserDefaultsManagement.DefaultEditorLetterSpacing, range: range)
+                textStorage.addAttribute(.kern, value: UserDefaultsManagement.editorLetterSpacing, range: range)
 
                 let imageKey = NSAttributedString.Key(rawValue: "com.tw93.miaoyan.image.url")
                 if let url = textStorage.attribute(imageKey, at: range.location, effectiveRange: nil) as? URL {

@@ -12,11 +12,11 @@ open class MarkdownView: WKWebView {
         self.didLoadSuccessfully = didLoadSuccessfully
 
         if let templateBundle = templateBundle {
-            self.bundle = templateBundle
+            bundle = templateBundle
         } else {
             let classBundle = Bundle(for: MarkdownView.self)
             let url = classBundle.url(forResource: "DownView", withExtension: "bundle")!
-            self.bundle = Bundle(url: url)!
+            bundle = Bundle(url: url)!
         }
 
         let userContentController = WKUserContentController()
@@ -76,9 +76,9 @@ open class MarkdownView: WKWebView {
 
     let bundle: Bundle
 
-    fileprivate lazy var baseURL: URL = self.bundle.url(forResource: "index", withExtension: "html")!
+    fileprivate lazy var baseURL: URL = bundle.url(forResource: "index", withExtension: "html")!
 
-    fileprivate lazy var pptURL: URL = self.bundle.url(forResource: "ppt", withExtension: "html")!
+    fileprivate lazy var pptURL: URL = bundle.url(forResource: "ppt", withExtension: "html")!
 
     fileprivate var didLoadSuccessfully: DownViewClosure?
 
@@ -239,8 +239,7 @@ extension MarkdownView: WKNavigationDelegate {
 
 class HandlerCopyCode: NSObject, WKScriptMessageHandler {
     func userContentController(_ userContentController: WKUserContentController,
-                               didReceive message: WKScriptMessage)
-    {
+                               didReceive message: WKScriptMessage) {
         let message = (message.body as! String).trimmingCharacters(in: .whitespacesAndNewlines)
         let pasteboard = NSPasteboard.general
         pasteboard.declareTypes([NSPasteboard.PasteboardType.string], owner: nil)
@@ -250,16 +249,14 @@ class HandlerCopyCode: NSObject, WKScriptMessageHandler {
 
 class HandlerMouseOver: NSObject, WKScriptMessageHandler {
     func userContentController(_ userContentController: WKUserContentController,
-                               didReceive message: WKScriptMessage)
-    {
+                               didReceive message: WKScriptMessage) {
         NSCursor.pointingHand.set()
     }
 }
 
 class HandlerMouseOut: NSObject, WKScriptMessageHandler {
     func userContentController(_ userContentController: WKUserContentController,
-                               didReceive message: WKScriptMessage)
-    {
+                               didReceive message: WKScriptMessage) {
         NSCursor.arrow.set()
     }
 }

@@ -149,7 +149,7 @@ public class NotesTextProcessor {
     /**
      Quote indentation in points. Default 20.
      */
-    open var quoteIndendation: CGFloat = 20
+    open var quoteIndentation: CGFloat = 20
 
     #if os(OSX)
     public static var codeFont = NSFont(name: UserDefaultsManagement.codeFontName, size: CGFloat(UserDefaultsManagement.fontSize))
@@ -167,6 +167,14 @@ public class NotesTextProcessor {
         return nil
     }
     #endif
+
+    public static var georgiaFont = NSFont(name: "Georgia", size: CGFloat(UserDefaultsManagement.fontSize))
+
+    public static var publicFont = NSFont(name: "Helvetica Neue", size: CGFloat(UserDefaultsManagement.fontSize))
+
+    public static var monacoFont = NSFont(name: "Monaco", size: CGFloat(UserDefaultsManagement.fontSize))
+
+    public static var titleFont = NSFont(name: UserDefaultsManagement.windowFontName, size: CGFloat(UserDefaultsManagement.titleFontSize))
 
     /**
      If the markdown syntax should be hidden or visible
@@ -300,16 +308,13 @@ public class NotesTextProcessor {
                 }
             )
 
-            attributedString.mutableString.enumerateSubstrings(in: range, options: .byParagraphs) { _, range, _, _ in
-                let rangeNewline = range.upperBound == attributedString.length ? range : NSRange(range.location..<range.upperBound + 1)
-                attributedString.addAttribute(.backgroundColor, value: NotesTextProcessor.codeBackground, range: rangeNewline)
+            if UserDefaultsManagement.codeBackground == "Yes" {
+                attributedString.mutableString.enumerateSubstrings(in: range, options: .byParagraphs) { _, range, _, _ in
+                    let rangeNewline = range.upperBound == attributedString.length ? range : NSRange(range.location..<range.upperBound + 1)
+                    attributedString.addAttribute(.backgroundColor, value: NotesTextProcessor.codeBackground, range: rangeNewline)
+                }
             }
         }
-    }
-
-    public static func applyCodeBlockStyle(attributedString: NSMutableAttributedString, range: NSRange) {
-//         let style = TextFormatter.getCodeParagraphStyle()
-//         attributedString.addAttribute(.paragraphStyle, value: style, range: range)
     }
 
     public static var languages: [String]?
@@ -371,8 +376,7 @@ public class NotesTextProcessor {
             if let value = value as? String, value.starts(with: tagQuery) {
                 if let tag = value
                     .replacingOccurrences(of: tagQuery, with: "")
-                    .removingPercentEncoding
-                {
+                    .removingPercentEncoding {
                     if NotesTextProcessor.getSpanCodeBlockRange(content: attributedString, range: range) != nil {
                         return
                     }
@@ -416,19 +420,6 @@ public class NotesTextProcessor {
                 NotesTextProcessor.highlightCode(attributedString: attributedString, range: r.range)
             }
         )
-
-//        let codeTextProcessor = CodeTextProcessor(textStorage: attributedString)
-//        if let codeBlockRanges = codeTextProcessor.getCodeBlockRanges() {
-//
-//            for range in codeBlockRanges {
-//
-//                if isIntersect(fencedRanges: fencedRanges, indentRange: range) {
-//                    continue
-//                }
-//
-//                NotesTextProcessor.highlightCode(attributedString: attributedString, range: range)
-//            }
-//        }
     }
 
     public static func isIntersect(fencedRanges: [NSRange], indentRange: NSRange) -> Bool {
@@ -789,9 +780,31 @@ public class NotesTextProcessor {
             guard let range = result?.range else { return }
             let substring = attributedString.mutableString.substring(with: range)
             if !substring.isNumber {
-                attributedString.removeAttribute(.backgroundColor, range: range)
                 attributedString.addAttribute(.font, value: NSFont.systemFont(ofSize: CGFloat(UserDefaultsManagement.fontSize - 2)), range: range)
                 attributedString.fixAttributes(in: range)
+            }
+        }
+
+        if UserDefaultsManagement.fontName == "SF Mono" {
+            NotesTextProcessor.blankRegex.matches(string, range: paragraphRange) { result in
+                guard let range = result?.range else { return }
+                attributedString.addAttribute(.font, value: publicFont!, range: range)
+            }
+        }
+
+        if UserDefaultsManagement.fontName == "Times New Roman", georgiaFont != nil {
+            NotesTextProcessor.englishAndSymbolRegex.matches(string, range: paragraphRange) { result in
+                guard let range = result?.range else { return }
+                attributedString.addAttribute(.font, value: georgiaFont!, range: range)
+            }
+        }
+
+        if monacoFont != nil {
+            NotesTextProcessor.allTodoInlineRegex.matches(string, range: paragraphRange) { result in
+                guard let range = result?.range else { return }
+                let middleRange = NSMakeRange(range.location + 3, 1)
+
+                attributedString.addAttribute(.font, value: monacoFont!, range: middleRange)
             }
         }
 
@@ -802,6 +815,7 @@ public class NotesTextProcessor {
             }
         }
 
+        // 兼容一下这里这个字体有些问题
         if isFullScan {
             checkBackTick(styleApplier: attributedString)
         }
@@ -824,8 +838,22 @@ public class NotesTextProcessor {
 
         NotesTextProcessor.codeSpanRegex.matches(styleApplier.string, range: range) { result in
             guard let range = result?.range else { return }
-
             styleApplier.addAttribute(.foregroundColor, value: NotesTextProcessor.htmlColor, range: range)
+        }
+
+        if UserDefaultsManagement.fontName == "Times New Roman" {
+            NotesTextProcessor.englishAndSymbolRegex.matches(styleApplier.string, range: range) { result in
+                guard let range = result?.range else { return }
+                styleApplier.addAttribute(.font, value: georgiaFont!, range: range)
+            }
+
+            if monacoFont != nil {
+                NotesTextProcessor.allTodoInlineRegex.matches(styleApplier.string, range: range) { result in
+                    guard let range = result?.range else { return }
+                    let middleRange = NSMakeRange(range.location + 3, 1)
+                    styleApplier.addAttribute(.font, value: monacoFont!, range: middleRange)
+                }
+            }
         }
     }
 
@@ -964,11 +992,11 @@ public class NotesTextProcessor {
 
     public static let anchorRegex = MarklightRegex(pattern: anchorPattern, options: [.allowCommentsAndWhitespace, .dotMatchesLineSeparators])
 
-    fileprivate static let opneningSquarePattern = [
+    fileprivate static let openingSquarePattern = [
         "(\\[)"
     ].joined(separator: "\n")
 
-    public static let openingSquareRegex = MarklightRegex(pattern: opneningSquarePattern, options: [.allowCommentsAndWhitespace])
+    public static let openingSquareRegex = MarklightRegex(pattern: openingSquarePattern, options: [.allowCommentsAndWhitespace])
 
     fileprivate static let closingSquarePattern = [
         "\\]"
@@ -1196,6 +1224,11 @@ public class NotesTextProcessor {
 
     public static let emojiRegex = MarklightRegex(pattern: EmojiPattern, options: [.allowCommentsAndWhitespace])
 
+    public static let englishAndSymbolPattern = "([a-zA-Z]+|[\\x21-\\x2f\\x3a-\\x40\\x5b-\\x60\\x7B-\\x7F])"
+    public static let englishAndSymbolRegex = MarklightRegex(pattern: englishAndSymbolPattern, options: [.allowCommentsAndWhitespace])
+
+    public static let blankRegex = MarklightRegex(pattern: "\\s+", options: [.allowCommentsAndWhitespace])
+
     // MARK: Italic
 
     fileprivate static let strictItalicPattern = "(^|[\\s_])(?:(?!\\1)|(?=^))(\\*|_)(?=\\S)((?:(?!\\2).)*?\\S)\\2(?!\\2)(?=[\\s]|(?:[.,!?]\\s)|$)"
@@ -1272,6 +1305,7 @@ public class NotesTextProcessor {
     }
 
     // We transform the user provided `fontName` `String` to a `NSFont`
+
     fileprivate static func codeFont(_ size: CGFloat) -> Font {
         if var font = UserDefaultsManagement.noteFont {
             #if os(iOS)
@@ -1292,6 +1326,7 @@ public class NotesTextProcessor {
     }
 
     // We transform the user provided `quoteFontName` `String` to a `NSFont`
+
     fileprivate static func quoteFont(_ size: CGFloat) -> Font {
         if var font = UserDefaultsManagement.noteFont {
             #if os(iOS)
@@ -1407,7 +1442,7 @@ public class NotesTextProcessor {
                             attributedString.addAttribute(NoteAttribute.highlight, value: true, range: subRange)
                         }
                         attributedString.addAttribute(NSAttributedString.Key.backgroundColor, value: titleColor, range: subRange)
-                        attributedString.addAttribute(.foregroundColor, value: NotesTextProcessor.syntaxColor, range: subRange)
+                        attributedString.addAttribute(.foregroundColor, value: NSColor.white, range: subRange)
                     }
                 }
             )
@@ -1445,13 +1480,11 @@ public struct MarklightRegex {
             }
             assert(re != nil)
         }
-
-        self.regularExpression = re
+        regularExpression = re
     }
 
     public func matches(_ input: String, range: NSRange,
-                        completion: @escaping (_ result: NSTextCheckingResult?) -> Void)
-    {
+                        completion: @escaping (_ result: NSTextCheckingResult?) -> Void) {
         let s = input as NSString
         // NSRegularExpression.
         let options = NSRegularExpression.MatchingOptions(rawValue: 0)

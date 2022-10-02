@@ -7,9 +7,9 @@ import Foundation
 import MiaoYanCore_macOS
 
 class SidebarProjectView: NSOutlineView,
-        NSOutlineViewDelegate,
-        NSOutlineViewDataSource,
-        NSMenuItemValidation {
+    NSOutlineViewDelegate,
+    NSOutlineViewDataSource,
+    NSMenuItemValidation {
     var sidebarItems: [Any]?
     var viewDelegate: ViewController?
 
@@ -417,10 +417,10 @@ class SidebarProjectView: NSOutlineView,
         }
 
         guard
-                let sidebarItem = si[selected] as? SidebarItem,
-                sidebarItem.type == .Category,
-                let projectRow = v.rowView(atRow: selected, makeIfNecessary: false),
-                let cell = projectRow.view(atColumn: 0) as? SidebarCellView
+            let sidebarItem = si[selected] as? SidebarItem,
+            sidebarItem.type == .Category,
+            let projectRow = v.rowView(atRow: selected, makeIfNecessary: false),
+            let cell = projectRow.view(atColumn: 0) as? SidebarCellView
         else {
             return
         }

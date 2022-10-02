@@ -5,7 +5,7 @@ import Cocoa
 public extension NSTextStorage {
     func updateFont() {
         beginEditing()
-        enumerateAttribute(.font, in: NSRange(location: 0, length: self.length)) { value, range, _ in
+        enumerateAttribute(.font, in: NSRange(location: 0, length: length)) { value, range, _ in
             if let font = value as? NSFont, let familyName = UserDefaultsManagement.noteFont.familyName {
                 let newFontDescriptor = font.fontDescriptor
                     .withFamily(familyName)
@@ -26,8 +26,8 @@ public extension NSTextStorage {
         let fontSize = UserDefaultsManagement.fontSize
 
         // 优先使用默认的
-        let editorLineHeight = UserDefaultsManagement.DefaultEditorLineHeight
-        let editorLineSpacing = UserDefaultsManagement.DefaultEditorLineSpacing
+        let editorLineHeight = UserDefaultsManagement.editorLineHeight
+        let editorLineSpacing = UserDefaultsManagement.editorLineSpacing
         let lineHeight = CGFloat(editorLineHeight * CGFloat(fontSize)) + editorLineSpacing
 
         paragraphStyle.alignment = .left
@@ -35,6 +35,7 @@ public extension NSTextStorage {
         paragraphStyle.lineHeightMultiple = editorLineHeight
         paragraphStyle.maximumLineHeight = lineHeight
         paragraphStyle.minimumLineHeight = lineHeight
+
         return paragraphStyle
     }
 
@@ -44,13 +45,13 @@ public extension NSTextStorage {
         mutableString.enumerateSubstrings(in: NSRange(0..<length), options: .byParagraphs) { _, range, _, _ in
             let rangeNewline = range.upperBound == self.length ? range : NSRange(range.location..<range.upperBound + 1)
             self.addAttribute(.paragraphStyle, value: attachmentParagraph, range: rangeNewline)
-            self.addAttribute(.kern, value: UserDefaultsManagement.DefaultEditorLetterSpacing, range: rangeNewline)
+            self.addAttribute(.kern, value: UserDefaultsManagement.editorLetterSpacing, range: rangeNewline)
         }
         endEditing()
     }
 
     func sizeAttachmentImages() {
-        enumerateAttribute(.attachment, in: NSRange(location: 0, length: self.length)) { value, range, _ in
+        enumerateAttribute(.attachment, in: NSRange(location: 0, length: length)) { value, range, _ in
             if let attachment = value as? NSTextAttachment,
                attribute(.todo, at: range.location, effectiveRange: nil) == nil {
                 if let imageData = attachment.fileWrapper?.regularFileContents, var image = NSImage(data: imageData) {
