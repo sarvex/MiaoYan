@@ -20,6 +20,139 @@
 		275592971F3AE9B5006B8988 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275592961F3AE9B5006B8988 /* MainWindowController.swift */; };
 		277A61D8244B538F000F0033 /* SidebarTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277A61D7244B538E000F0033 /* SidebarTableRowView.swift */; };
 		27838E68287521C0009E8012 /* DetachedWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27838E67287521C0009E8012 /* DetachedWindowController.swift */; };
+		27951F6128E9CCF2007FB6EE /* entity.md in Resources */ = {isa = PBXBuildFile; fileRef = 27951EB528E9CCF2007FB6EE /* entity.md */; };
+		27951F6228E9CCF2007FB6EE /* cute-list.md in Resources */ = {isa = PBXBuildFile; fileRef = 27951EB628E9CCF2007FB6EE /* cute-list.md */; };
+		27951F6328E9CCF2007FB6EE /* zh_CN.md in Resources */ = {isa = PBXBuildFile; fileRef = 27951EB728E9CCF2007FB6EE /* zh_CN.md */; };
+		27951F6428E9CCF2007FB6EE /* ko_KR.md in Resources */ = {isa = PBXBuildFile; fileRef = 27951EB828E9CCF2007FB6EE /* ko_KR.md */; };
+		27951F6528E9CCF2007FB6EE /* index.js in Resources */ = {isa = PBXBuildFile; fileRef = 27951EB928E9CCF2007FB6EE /* index.js */; };
+		27951F6628E9CCF2007FB6EE /* webpack.start.js in Resources */ = {isa = PBXBuildFile; fileRef = 27951EBA28E9CCF2007FB6EE /* webpack.start.js */; };
+		27951F6728E9CCF2007FB6EE /* index.d.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951EBC28E9CCF2007FB6EE /* index.d.ts */; };
+		27951F6828E9CCF2007FB6EE /* index.d.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951EBF28E9CCF2007FB6EE /* index.d.ts */; };
+		27951F6928E9CCF2007FB6EE /* dark.css in Resources */ = {isa = PBXBuildFile; fileRef = 27951EC228E9CCF2007FB6EE /* dark.css */; };
+		27951F6A28E9CCF2007FB6EE /* light.css in Resources */ = {isa = PBXBuildFile; fileRef = 27951EC328E9CCF2007FB6EE /* light.css */; };
+		27951F6B28E9CCF2007FB6EE /* plantuml-encoder.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 27951EC628E9CCF2007FB6EE /* plantuml-encoder.min.js */; };
+		27951F6C28E9CCF2007FB6EE /* katex.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 27951EC828E9CCF2007FB6EE /* katex.min.css */; };
+		27951F6D28E9CCF2007FB6EE /* katex.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 27951EC928E9CCF2007FB6EE /* katex.min.js */; };
+		27951F6E28E9CCF2007FB6EE /* mhchem.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 27951ECA28E9CCF2007FB6EE /* mhchem.min.js */; };
+		27951F6F28E9CCF2007FB6EE /* lute.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 27951ECC28E9CCF2007FB6EE /* lute.min.js */; };
+		27951F7028E9CCF2007FB6EE /* highlight.pack.js in Resources */ = {isa = PBXBuildFile; fileRef = 27951ECE28E9CCF2007FB6EE /* highlight.pack.js */; };
+		27951F7128E9CCF2007FB6EE /* solidity.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 27951ECF28E9CCF2007FB6EE /* solidity.min.js */; };
+		27951F7228E9CCF2007FB6EE /* xcode.css in Resources */ = {isa = PBXBuildFile; fileRef = 27951ED128E9CCF2007FB6EE /* xcode.css */; };
+		27951F7328E9CCF2007FB6EE /* vs.css in Resources */ = {isa = PBXBuildFile; fileRef = 27951ED228E9CCF2007FB6EE /* vs.css */; };
+		27951F7428E9CCF2007FB6EE /* yul.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 27951ED328E9CCF2007FB6EE /* yul.min.js */; };
+		27951F7528E9CCF2007FB6EE /* mermaid.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 27951ED528E9CCF2007FB6EE /* mermaid.min.js */; };
+		27951F7628E9CCF2007FB6EE /* index.css in Resources */ = {isa = PBXBuildFile; fileRef = 27951ED628E9CCF2007FB6EE /* index.css */; };
+		27951F7728E9CCF2007FB6EE /* index.d.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951ED728E9CCF2007FB6EE /* index.d.ts */; };
+		27951F7828E9CCF2007FB6EE /* method.d.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951ED828E9CCF2007FB6EE /* method.d.ts */; };
+		27951F7928E9CCF2007FB6EE /* constants.d.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951EDA28E9CCF2007FB6EE /* constants.d.ts */; };
+		27951F7A28E9CCF2007FB6EE /* index.d.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951EDC28E9CCF2007FB6EE /* index.d.ts */; };
+		27951F7B28E9CCF2007FB6EE /* initUI.d.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951EDE28E9CCF2007FB6EE /* initUI.d.ts */; };
+		27951F7C28E9CCF2007FB6EE /* setPreviewMode.d.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951EDF28E9CCF2007FB6EE /* setPreviewMode.d.ts */; };
+		27951F7D28E9CCF2007FB6EE /* setContentTheme.d.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951EE028E9CCF2007FB6EE /* setContentTheme.d.ts */; };
+		27951F7E28E9CCF2007FB6EE /* setCodeTheme.d.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951EE128E9CCF2007FB6EE /* setCodeTheme.d.ts */; };
+		27951F7F28E9CCF2007FB6EE /* setTheme.d.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951EE228E9CCF2007FB6EE /* setTheme.d.ts */; };
+		27951F8028E9CCF2007FB6EE /* processCode.d.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951EE428E9CCF2007FB6EE /* processCode.d.ts */; };
+		27951F8128E9CCF2007FB6EE /* editorCommonEvent.d.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951EE528E9CCF2007FB6EE /* editorCommonEvent.d.ts */; };
+		27951F8228E9CCF2007FB6EE /* Options.d.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951EE628E9CCF2007FB6EE /* Options.d.ts */; };
+		27951F8328E9CCF2007FB6EE /* code160to32.d.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951EE728E9CCF2007FB6EE /* code160to32.d.ts */; };
+		27951F8428E9CCF2007FB6EE /* fixBrowserBehavior.d.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951EE828E9CCF2007FB6EE /* fixBrowserBehavior.d.ts */; };
+		27951F8528E9CCF2007FB6EE /* getSelectText.d.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951EE928E9CCF2007FB6EE /* getSelectText.d.ts */; };
+		27951F8628E9CCF2007FB6EE /* addStyle.d.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951EEA28E9CCF2007FB6EE /* addStyle.d.ts */; };
+		27951F8728E9CCF2007FB6EE /* compatibility.d.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951EEB28E9CCF2007FB6EE /* compatibility.d.ts */; };
+		27951F8828E9CCF2007FB6EE /* hasClosest.d.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951EEC28E9CCF2007FB6EE /* hasClosest.d.ts */; };
+		27951F8928E9CCF2007FB6EE /* selection.d.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951EED28E9CCF2007FB6EE /* selection.d.ts */; };
+		27951F8A28E9CCF2007FB6EE /* hasClosestByHeadings.d.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951EEE28E9CCF2007FB6EE /* hasClosestByHeadings.d.ts */; };
+		27951F8B28E9CCF2007FB6EE /* merge.d.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951EEF28E9CCF2007FB6EE /* merge.d.ts */; };
+		27951F8C28E9CCF2007FB6EE /* hotKey.d.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951EF028E9CCF2007FB6EE /* hotKey.d.ts */; };
+		27951F8D28E9CCF2007FB6EE /* addScript.d.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951EF128E9CCF2007FB6EE /* addScript.d.ts */; };
+		27951F8E28E9CCF2007FB6EE /* input.d.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951EF328E9CCF2007FB6EE /* input.d.ts */; };
+		27951F8F28E9CCF2007FB6EE /* expandMarker.d.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951EF428E9CCF2007FB6EE /* expandMarker.d.ts */; };
+		27951F9028E9CCF2007FB6EE /* process.d.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951EF528E9CCF2007FB6EE /* process.d.ts */; };
+		27951F9128E9CCF2007FB6EE /* index.d.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951EF628E9CCF2007FB6EE /* index.d.ts */; };
+		27951F9228E9CCF2007FB6EE /* processKeydown.d.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951EF728E9CCF2007FB6EE /* processKeydown.d.ts */; };
+		27951F9328E9CCF2007FB6EE /* setLute.d.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951EF928E9CCF2007FB6EE /* setLute.d.ts */; };
+		27951F9428E9CCF2007FB6EE /* codeRender.d.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951EFA28E9CCF2007FB6EE /* codeRender.d.ts */; };
+		27951F9528E9CCF2007FB6EE /* adapterRender.d.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951EFB28E9CCF2007FB6EE /* adapterRender.d.ts */; };
+		27951F9628E9CCF2007FB6EE /* highlightRender.d.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951EFC28E9CCF2007FB6EE /* highlightRender.d.ts */; };
+		27951F9728E9CCF2007FB6EE /* anchorRender.d.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951EFD28E9CCF2007FB6EE /* anchorRender.d.ts */; };
+		27951F9828E9CCF2007FB6EE /* getHTML.d.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951EFE28E9CCF2007FB6EE /* getHTML.d.ts */; };
+		27951F9928E9CCF2007FB6EE /* flowchartRender.d.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951EFF28E9CCF2007FB6EE /* flowchartRender.d.ts */; };
+		27951F9A28E9CCF2007FB6EE /* previewRender.d.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951F0028E9CCF2007FB6EE /* previewRender.d.ts */; };
+		27951F9B28E9CCF2007FB6EE /* mathRender.d.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951F0128E9CCF2007FB6EE /* mathRender.d.ts */; };
+		27951F9C28E9CCF2007FB6EE /* getMarkdown.d.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951F0228E9CCF2007FB6EE /* getMarkdown.d.ts */; };
+		27951F9D28E9CCF2007FB6EE /* plantumlRender.d.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951F0328E9CCF2007FB6EE /* plantumlRender.d.ts */; };
+		27951F9E28E9CCF2007FB6EE /* mermaidRender.d.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951F0428E9CCF2007FB6EE /* mermaidRender.d.ts */; };
+		27951F9F28E9CCF2007FB6EE /* index.d.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951F0628E9CCF2007FB6EE /* index.d.ts */; };
+		27951FA028E9CCF2007FB6EE /* index.d.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951F0828E9CCF2007FB6EE /* index.d.ts */; };
+		27951FA128E9CCF2007FB6EE /* image.d.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951F0928E9CCF2007FB6EE /* image.d.ts */; };
+		27951FA228E9CCF2007FB6EE /* index.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 27951F0A28E9CCF2007FB6EE /* index.min.js */; };
+		27951FA328E9CCF2007FB6EE /* method.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 27951F0B28E9CCF2007FB6EE /* method.min.js */; };
+		27951FA428E9CCF2007FB6EE /* .eslintrc in Resources */ = {isa = PBXBuildFile; fileRef = 27951F0C28E9CCF2007FB6EE /* .eslintrc */; };
+		27951FA528E9CCF2007FB6EE /* webpack.config.js in Resources */ = {isa = PBXBuildFile; fileRef = 27951F0D28E9CCF2007FB6EE /* webpack.config.js */; };
+		27951FA628E9CCF2007FB6EE /* .editorconfig in Resources */ = {isa = PBXBuildFile; fileRef = 27951F0E28E9CCF2007FB6EE /* .editorconfig */; };
+		27951FA728E9CCF2007FB6EE /* package.json in Resources */ = {isa = PBXBuildFile; fileRef = 27951F0F28E9CCF2007FB6EE /* package.json */; };
+		27951FA828E9CCF2007FB6EE /* .prettierrc in Resources */ = {isa = PBXBuildFile; fileRef = 27951F1028E9CCF2007FB6EE /* .prettierrc */; };
+		27951FA928E9CCF2007FB6EE /* tsconfig.json in Resources */ = {isa = PBXBuildFile; fileRef = 27951F1128E9CCF2007FB6EE /* tsconfig.json */; };
+		27951FAA28E9CCF2007FB6EE /* .eslintignore in Resources */ = {isa = PBXBuildFile; fileRef = 27951F1228E9CCF2007FB6EE /* .eslintignore */; };
+		27951FAB28E9CCF2007FB6EE /* dark.css in Resources */ = {isa = PBXBuildFile; fileRef = 27951F1628E9CCF2007FB6EE /* dark.css */; };
+		27951FAC28E9CCF2007FB6EE /* light.css in Resources */ = {isa = PBXBuildFile; fileRef = 27951F1728E9CCF2007FB6EE /* light.css */; };
+		27951FAD28E9CCF2007FB6EE /* plantuml-encoder.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 27951F1A28E9CCF2007FB6EE /* plantuml-encoder.min.js */; };
+		27951FAE28E9CCF2007FB6EE /* katex.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 27951F1C28E9CCF2007FB6EE /* katex.min.css */; };
+		27951FAF28E9CCF2007FB6EE /* katex.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 27951F1D28E9CCF2007FB6EE /* katex.min.js */; };
+		27951FB028E9CCF2007FB6EE /* mhchem.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 27951F1E28E9CCF2007FB6EE /* mhchem.min.js */; };
+		27951FB128E9CCF2007FB6EE /* lute.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 27951F2028E9CCF2007FB6EE /* lute.min.js */; };
+		27951FB228E9CCF2007FB6EE /* highlight.pack.js in Resources */ = {isa = PBXBuildFile; fileRef = 27951F2228E9CCF2007FB6EE /* highlight.pack.js */; };
+		27951FB328E9CCF2007FB6EE /* solidity.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 27951F2328E9CCF2007FB6EE /* solidity.min.js */; };
+		27951FB428E9CCF2007FB6EE /* xcode.css in Resources */ = {isa = PBXBuildFile; fileRef = 27951F2528E9CCF2007FB6EE /* xcode.css */; };
+		27951FB528E9CCF2007FB6EE /* vs.css in Resources */ = {isa = PBXBuildFile; fileRef = 27951F2628E9CCF2007FB6EE /* vs.css */; };
+		27951FB628E9CCF2007FB6EE /* yul.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 27951F2728E9CCF2007FB6EE /* yul.min.js */; };
+		27951FB728E9CCF2007FB6EE /* mermaid.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 27951F2928E9CCF2007FB6EE /* mermaid.min.js */; };
+		27951FB828E9CCF2007FB6EE /* method.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951F2A28E9CCF2007FB6EE /* method.ts */; };
+		27951FB928E9CCF2007FB6EE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951F2B28E9CCF2007FB6EE /* index.ts */; };
+		27951FBA28E9CCF2007FB6EE /* _reset.less in Resources */ = {isa = PBXBuildFile; fileRef = 27951F2E28E9CCF2007FB6EE /* _reset.less */; };
+		27951FBB28E9CCF2007FB6EE /* _ir.less in Resources */ = {isa = PBXBuildFile; fileRef = 27951F2F28E9CCF2007FB6EE /* _ir.less */; };
+		27951FBC28E9CCF2007FB6EE /* index.less in Resources */ = {isa = PBXBuildFile; fileRef = 27951F3028E9CCF2007FB6EE /* index.less */; };
+		27951FBD28E9CCF2007FB6EE /* _panel.less in Resources */ = {isa = PBXBuildFile; fileRef = 27951F3128E9CCF2007FB6EE /* _panel.less */; };
+		27951FBE28E9CCF2007FB6EE /* _content.less in Resources */ = {isa = PBXBuildFile; fileRef = 27951F3228E9CCF2007FB6EE /* _content.less */; };
+		27951FBF28E9CCF2007FB6EE /* setContentTheme.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951F3528E9CCF2007FB6EE /* setContentTheme.ts */; };
+		27951FC028E9CCF2007FB6EE /* setPreviewMode.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951F3628E9CCF2007FB6EE /* setPreviewMode.ts */; };
+		27951FC128E9CCF2007FB6EE /* initUI.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951F3728E9CCF2007FB6EE /* initUI.ts */; };
+		27951FC228E9CCF2007FB6EE /* setTheme.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951F3828E9CCF2007FB6EE /* setTheme.ts */; };
+		27951FC328E9CCF2007FB6EE /* setCodeTheme.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951F3928E9CCF2007FB6EE /* setCodeTheme.ts */; };
+		27951FC428E9CCF2007FB6EE /* addScript.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951F3B28E9CCF2007FB6EE /* addScript.ts */; };
+		27951FC528E9CCF2007FB6EE /* selection.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951F3C28E9CCF2007FB6EE /* selection.ts */; };
+		27951FC628E9CCF2007FB6EE /* hasClosestByHeadings.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951F3D28E9CCF2007FB6EE /* hasClosestByHeadings.ts */; };
+		27951FC728E9CCF2007FB6EE /* addStyle.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951F3E28E9CCF2007FB6EE /* addStyle.ts */; };
+		27951FC828E9CCF2007FB6EE /* code160to32.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951F3F28E9CCF2007FB6EE /* code160to32.ts */; };
+		27951FC928E9CCF2007FB6EE /* editorCommonEvent.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951F4028E9CCF2007FB6EE /* editorCommonEvent.ts */; };
+		27951FCA28E9CCF2007FB6EE /* fixBrowserBehavior.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951F4128E9CCF2007FB6EE /* fixBrowserBehavior.ts */; };
+		27951FCB28E9CCF2007FB6EE /* hasClosest.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951F4228E9CCF2007FB6EE /* hasClosest.ts */; };
+		27951FCC28E9CCF2007FB6EE /* getSelectText.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951F4328E9CCF2007FB6EE /* getSelectText.ts */; };
+		27951FCD28E9CCF2007FB6EE /* merge.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951F4428E9CCF2007FB6EE /* merge.ts */; };
+		27951FCE28E9CCF2007FB6EE /* hotKey.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951F4528E9CCF2007FB6EE /* hotKey.ts */; };
+		27951FCF28E9CCF3007FB6EE /* compatibility.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951F4628E9CCF2007FB6EE /* compatibility.ts */; };
+		27951FD028E9CCF3007FB6EE /* Options.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951F4728E9CCF2007FB6EE /* Options.ts */; };
+		27951FD128E9CCF3007FB6EE /* processCode.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951F4828E9CCF2007FB6EE /* processCode.ts */; };
+		27951FD228E9CCF3007FB6EE /* expandMarker.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951F4A28E9CCF2007FB6EE /* expandMarker.ts */; };
+		27951FD328E9CCF3007FB6EE /* processKeydown.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951F4B28E9CCF2007FB6EE /* processKeydown.ts */; };
+		27951FD428E9CCF3007FB6EE /* process.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951F4C28E9CCF2007FB6EE /* process.ts */; };
+		27951FD528E9CCF3007FB6EE /* input.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951F4D28E9CCF2007FB6EE /* input.ts */; };
+		27951FD628E9CCF3007FB6EE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951F4E28E9CCF2007FB6EE /* index.ts */; };
+		27951FD728E9CCF3007FB6EE /* flowchartRender.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951F5028E9CCF2007FB6EE /* flowchartRender.ts */; };
+		27951FD828E9CCF3007FB6EE /* mathRender.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951F5128E9CCF2007FB6EE /* mathRender.ts */; };
+		27951FD928E9CCF3007FB6EE /* plantumlRender.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951F5228E9CCF2007FB6EE /* plantumlRender.ts */; };
+		27951FDA28E9CCF3007FB6EE /* getHTML.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951F5328E9CCF2007FB6EE /* getHTML.ts */; };
+		27951FDB28E9CCF3007FB6EE /* adapterRender.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951F5428E9CCF2007FB6EE /* adapterRender.ts */; };
+		27951FDC28E9CCF3007FB6EE /* previewRender.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951F5528E9CCF2007FB6EE /* previewRender.ts */; };
+		27951FDD28E9CCF3007FB6EE /* anchorRender.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951F5628E9CCF2007FB6EE /* anchorRender.ts */; };
+		27951FDE28E9CCF3007FB6EE /* setLute.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951F5728E9CCF2007FB6EE /* setLute.ts */; };
+		27951FDF28E9CCF3007FB6EE /* mermaidRender.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951F5828E9CCF2007FB6EE /* mermaidRender.ts */; };
+		27951FE028E9CCF3007FB6EE /* codeRender.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951F5928E9CCF2007FB6EE /* codeRender.ts */; };
+		27951FE128E9CCF3007FB6EE /* highlightRender.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951F5A28E9CCF2007FB6EE /* highlightRender.ts */; };
+		27951FE228E9CCF3007FB6EE /* getMarkdown.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951F5B28E9CCF2007FB6EE /* getMarkdown.ts */; };
+		27951FE328E9CCF3007FB6EE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951F5D28E9CCF2007FB6EE /* index.ts */; };
+		27951FE428E9CCF3007FB6EE /* constants.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951F5E28E9CCF2007FB6EE /* constants.ts */; };
+		27951FE528E9CCF3007FB6EE /* image.ts in Resources */ = {isa = PBXBuildFile; fileRef = 27951F6028E9CCF2007FB6EE /* image.ts */; };
 		2799407C218484C900727B20 /* TitleBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2799407B218484C900727B20 /* TitleBarView.swift */; };
 		27C34C0E28928D0B007369E5 /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C34C0D28928D0B007369E5 /* Emoji.swift */; };
 		27D95122285B5E4400F40306 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D95121285B5E4400F40306 /* Toast.swift */; };
@@ -202,6 +335,139 @@
 		277DB692288AB6E9003DA090 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		27838E67287521C0009E8012 /* DetachedWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetachedWindowController.swift; sourceTree = "<group>"; };
 		2789B1E3287FD9C500BF8BC1 /* MiaoYan.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = MiaoYan.entitlements; sourceTree = "<group>"; };
+		27951EB528E9CCF2007FB6EE /* entity.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = entity.md; sourceTree = "<group>"; };
+		27951EB628E9CCF2007FB6EE /* cute-list.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "cute-list.md"; sourceTree = "<group>"; };
+		27951EB728E9CCF2007FB6EE /* zh_CN.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = zh_CN.md; sourceTree = "<group>"; };
+		27951EB828E9CCF2007FB6EE /* ko_KR.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = ko_KR.md; sourceTree = "<group>"; };
+		27951EB928E9CCF2007FB6EE /* index.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = index.js; sourceTree = "<group>"; };
+		27951EBA28E9CCF2007FB6EE /* webpack.start.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = webpack.start.js; sourceTree = "<group>"; };
+		27951EBC28E9CCF2007FB6EE /* index.d.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = index.d.ts; sourceTree = "<group>"; };
+		27951EBF28E9CCF2007FB6EE /* index.d.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = index.d.ts; sourceTree = "<group>"; };
+		27951EC228E9CCF2007FB6EE /* dark.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = dark.css; sourceTree = "<group>"; };
+		27951EC328E9CCF2007FB6EE /* light.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = light.css; sourceTree = "<group>"; };
+		27951EC628E9CCF2007FB6EE /* plantuml-encoder.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "plantuml-encoder.min.js"; sourceTree = "<group>"; };
+		27951EC828E9CCF2007FB6EE /* katex.min.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = katex.min.css; sourceTree = "<group>"; };
+		27951EC928E9CCF2007FB6EE /* katex.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = katex.min.js; sourceTree = "<group>"; };
+		27951ECA28E9CCF2007FB6EE /* mhchem.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = mhchem.min.js; sourceTree = "<group>"; };
+		27951ECC28E9CCF2007FB6EE /* lute.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = lute.min.js; sourceTree = "<group>"; };
+		27951ECE28E9CCF2007FB6EE /* highlight.pack.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = highlight.pack.js; sourceTree = "<group>"; };
+		27951ECF28E9CCF2007FB6EE /* solidity.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = solidity.min.js; sourceTree = "<group>"; };
+		27951ED128E9CCF2007FB6EE /* xcode.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = xcode.css; sourceTree = "<group>"; };
+		27951ED228E9CCF2007FB6EE /* vs.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = vs.css; sourceTree = "<group>"; };
+		27951ED328E9CCF2007FB6EE /* yul.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = yul.min.js; sourceTree = "<group>"; };
+		27951ED528E9CCF2007FB6EE /* mermaid.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = mermaid.min.js; sourceTree = "<group>"; };
+		27951ED628E9CCF2007FB6EE /* index.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = index.css; sourceTree = "<group>"; };
+		27951ED728E9CCF2007FB6EE /* index.d.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = index.d.ts; sourceTree = "<group>"; };
+		27951ED828E9CCF2007FB6EE /* method.d.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = method.d.ts; sourceTree = "<group>"; };
+		27951EDA28E9CCF2007FB6EE /* constants.d.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = constants.d.ts; sourceTree = "<group>"; };
+		27951EDC28E9CCF2007FB6EE /* index.d.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = index.d.ts; sourceTree = "<group>"; };
+		27951EDE28E9CCF2007FB6EE /* initUI.d.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = initUI.d.ts; sourceTree = "<group>"; };
+		27951EDF28E9CCF2007FB6EE /* setPreviewMode.d.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = setPreviewMode.d.ts; sourceTree = "<group>"; };
+		27951EE028E9CCF2007FB6EE /* setContentTheme.d.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = setContentTheme.d.ts; sourceTree = "<group>"; };
+		27951EE128E9CCF2007FB6EE /* setCodeTheme.d.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = setCodeTheme.d.ts; sourceTree = "<group>"; };
+		27951EE228E9CCF2007FB6EE /* setTheme.d.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = setTheme.d.ts; sourceTree = "<group>"; };
+		27951EE428E9CCF2007FB6EE /* processCode.d.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = processCode.d.ts; sourceTree = "<group>"; };
+		27951EE528E9CCF2007FB6EE /* editorCommonEvent.d.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = editorCommonEvent.d.ts; sourceTree = "<group>"; };
+		27951EE628E9CCF2007FB6EE /* Options.d.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Options.d.ts; sourceTree = "<group>"; };
+		27951EE728E9CCF2007FB6EE /* code160to32.d.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = code160to32.d.ts; sourceTree = "<group>"; };
+		27951EE828E9CCF2007FB6EE /* fixBrowserBehavior.d.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fixBrowserBehavior.d.ts; sourceTree = "<group>"; };
+		27951EE928E9CCF2007FB6EE /* getSelectText.d.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = getSelectText.d.ts; sourceTree = "<group>"; };
+		27951EEA28E9CCF2007FB6EE /* addStyle.d.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = addStyle.d.ts; sourceTree = "<group>"; };
+		27951EEB28E9CCF2007FB6EE /* compatibility.d.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = compatibility.d.ts; sourceTree = "<group>"; };
+		27951EEC28E9CCF2007FB6EE /* hasClosest.d.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = hasClosest.d.ts; sourceTree = "<group>"; };
+		27951EED28E9CCF2007FB6EE /* selection.d.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = selection.d.ts; sourceTree = "<group>"; };
+		27951EEE28E9CCF2007FB6EE /* hasClosestByHeadings.d.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = hasClosestByHeadings.d.ts; sourceTree = "<group>"; };
+		27951EEF28E9CCF2007FB6EE /* merge.d.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = merge.d.ts; sourceTree = "<group>"; };
+		27951EF028E9CCF2007FB6EE /* hotKey.d.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = hotKey.d.ts; sourceTree = "<group>"; };
+		27951EF128E9CCF2007FB6EE /* addScript.d.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = addScript.d.ts; sourceTree = "<group>"; };
+		27951EF328E9CCF2007FB6EE /* input.d.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.d.ts; sourceTree = "<group>"; };
+		27951EF428E9CCF2007FB6EE /* expandMarker.d.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = expandMarker.d.ts; sourceTree = "<group>"; };
+		27951EF528E9CCF2007FB6EE /* process.d.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = process.d.ts; sourceTree = "<group>"; };
+		27951EF628E9CCF2007FB6EE /* index.d.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = index.d.ts; sourceTree = "<group>"; };
+		27951EF728E9CCF2007FB6EE /* processKeydown.d.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = processKeydown.d.ts; sourceTree = "<group>"; };
+		27951EF928E9CCF2007FB6EE /* setLute.d.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = setLute.d.ts; sourceTree = "<group>"; };
+		27951EFA28E9CCF2007FB6EE /* codeRender.d.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = codeRender.d.ts; sourceTree = "<group>"; };
+		27951EFB28E9CCF2007FB6EE /* adapterRender.d.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = adapterRender.d.ts; sourceTree = "<group>"; };
+		27951EFC28E9CCF2007FB6EE /* highlightRender.d.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = highlightRender.d.ts; sourceTree = "<group>"; };
+		27951EFD28E9CCF2007FB6EE /* anchorRender.d.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = anchorRender.d.ts; sourceTree = "<group>"; };
+		27951EFE28E9CCF2007FB6EE /* getHTML.d.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = getHTML.d.ts; sourceTree = "<group>"; };
+		27951EFF28E9CCF2007FB6EE /* flowchartRender.d.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = flowchartRender.d.ts; sourceTree = "<group>"; };
+		27951F0028E9CCF2007FB6EE /* previewRender.d.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = previewRender.d.ts; sourceTree = "<group>"; };
+		27951F0128E9CCF2007FB6EE /* mathRender.d.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mathRender.d.ts; sourceTree = "<group>"; };
+		27951F0228E9CCF2007FB6EE /* getMarkdown.d.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = getMarkdown.d.ts; sourceTree = "<group>"; };
+		27951F0328E9CCF2007FB6EE /* plantumlRender.d.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = plantumlRender.d.ts; sourceTree = "<group>"; };
+		27951F0428E9CCF2007FB6EE /* mermaidRender.d.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mermaidRender.d.ts; sourceTree = "<group>"; };
+		27951F0628E9CCF2007FB6EE /* index.d.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = index.d.ts; sourceTree = "<group>"; };
+		27951F0828E9CCF2007FB6EE /* index.d.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = index.d.ts; sourceTree = "<group>"; };
+		27951F0928E9CCF2007FB6EE /* image.d.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = image.d.ts; sourceTree = "<group>"; };
+		27951F0A28E9CCF2007FB6EE /* index.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = index.min.js; sourceTree = "<group>"; };
+		27951F0B28E9CCF2007FB6EE /* method.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = method.min.js; sourceTree = "<group>"; };
+		27951F0C28E9CCF2007FB6EE /* .eslintrc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .eslintrc; sourceTree = "<group>"; };
+		27951F0D28E9CCF2007FB6EE /* webpack.config.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = webpack.config.js; sourceTree = "<group>"; };
+		27951F0E28E9CCF2007FB6EE /* .editorconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .editorconfig; sourceTree = "<group>"; };
+		27951F0F28E9CCF2007FB6EE /* package.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = package.json; sourceTree = "<group>"; };
+		27951F1028E9CCF2007FB6EE /* .prettierrc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .prettierrc; sourceTree = "<group>"; };
+		27951F1128E9CCF2007FB6EE /* tsconfig.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tsconfig.json; sourceTree = "<group>"; };
+		27951F1228E9CCF2007FB6EE /* .eslintignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .eslintignore; sourceTree = "<group>"; };
+		27951F1628E9CCF2007FB6EE /* dark.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = dark.css; sourceTree = "<group>"; };
+		27951F1728E9CCF2007FB6EE /* light.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = light.css; sourceTree = "<group>"; };
+		27951F1A28E9CCF2007FB6EE /* plantuml-encoder.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "plantuml-encoder.min.js"; sourceTree = "<group>"; };
+		27951F1C28E9CCF2007FB6EE /* katex.min.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = katex.min.css; sourceTree = "<group>"; };
+		27951F1D28E9CCF2007FB6EE /* katex.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = katex.min.js; sourceTree = "<group>"; };
+		27951F1E28E9CCF2007FB6EE /* mhchem.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = mhchem.min.js; sourceTree = "<group>"; };
+		27951F2028E9CCF2007FB6EE /* lute.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = lute.min.js; sourceTree = "<group>"; };
+		27951F2228E9CCF2007FB6EE /* highlight.pack.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = highlight.pack.js; sourceTree = "<group>"; };
+		27951F2328E9CCF2007FB6EE /* solidity.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = solidity.min.js; sourceTree = "<group>"; };
+		27951F2528E9CCF2007FB6EE /* xcode.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = xcode.css; sourceTree = "<group>"; };
+		27951F2628E9CCF2007FB6EE /* vs.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = vs.css; sourceTree = "<group>"; };
+		27951F2728E9CCF2007FB6EE /* yul.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = yul.min.js; sourceTree = "<group>"; };
+		27951F2928E9CCF2007FB6EE /* mermaid.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = mermaid.min.js; sourceTree = "<group>"; };
+		27951F2A28E9CCF2007FB6EE /* method.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = method.ts; sourceTree = "<group>"; };
+		27951F2B28E9CCF2007FB6EE /* index.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = index.ts; sourceTree = "<group>"; };
+		27951F2E28E9CCF2007FB6EE /* _reset.less */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = _reset.less; sourceTree = "<group>"; };
+		27951F2F28E9CCF2007FB6EE /* _ir.less */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = _ir.less; sourceTree = "<group>"; };
+		27951F3028E9CCF2007FB6EE /* index.less */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = index.less; sourceTree = "<group>"; };
+		27951F3128E9CCF2007FB6EE /* _panel.less */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = _panel.less; sourceTree = "<group>"; };
+		27951F3228E9CCF2007FB6EE /* _content.less */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = _content.less; sourceTree = "<group>"; };
+		27951F3528E9CCF2007FB6EE /* setContentTheme.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = setContentTheme.ts; sourceTree = "<group>"; };
+		27951F3628E9CCF2007FB6EE /* setPreviewMode.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = setPreviewMode.ts; sourceTree = "<group>"; };
+		27951F3728E9CCF2007FB6EE /* initUI.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = initUI.ts; sourceTree = "<group>"; };
+		27951F3828E9CCF2007FB6EE /* setTheme.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = setTheme.ts; sourceTree = "<group>"; };
+		27951F3928E9CCF2007FB6EE /* setCodeTheme.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = setCodeTheme.ts; sourceTree = "<group>"; };
+		27951F3B28E9CCF2007FB6EE /* addScript.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = addScript.ts; sourceTree = "<group>"; };
+		27951F3C28E9CCF2007FB6EE /* selection.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = selection.ts; sourceTree = "<group>"; };
+		27951F3D28E9CCF2007FB6EE /* hasClosestByHeadings.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = hasClosestByHeadings.ts; sourceTree = "<group>"; };
+		27951F3E28E9CCF2007FB6EE /* addStyle.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = addStyle.ts; sourceTree = "<group>"; };
+		27951F3F28E9CCF2007FB6EE /* code160to32.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = code160to32.ts; sourceTree = "<group>"; };
+		27951F4028E9CCF2007FB6EE /* editorCommonEvent.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = editorCommonEvent.ts; sourceTree = "<group>"; };
+		27951F4128E9CCF2007FB6EE /* fixBrowserBehavior.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fixBrowserBehavior.ts; sourceTree = "<group>"; };
+		27951F4228E9CCF2007FB6EE /* hasClosest.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = hasClosest.ts; sourceTree = "<group>"; };
+		27951F4328E9CCF2007FB6EE /* getSelectText.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = getSelectText.ts; sourceTree = "<group>"; };
+		27951F4428E9CCF2007FB6EE /* merge.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = merge.ts; sourceTree = "<group>"; };
+		27951F4528E9CCF2007FB6EE /* hotKey.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = hotKey.ts; sourceTree = "<group>"; };
+		27951F4628E9CCF2007FB6EE /* compatibility.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = compatibility.ts; sourceTree = "<group>"; };
+		27951F4728E9CCF2007FB6EE /* Options.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Options.ts; sourceTree = "<group>"; };
+		27951F4828E9CCF2007FB6EE /* processCode.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = processCode.ts; sourceTree = "<group>"; };
+		27951F4A28E9CCF2007FB6EE /* expandMarker.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = expandMarker.ts; sourceTree = "<group>"; };
+		27951F4B28E9CCF2007FB6EE /* processKeydown.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = processKeydown.ts; sourceTree = "<group>"; };
+		27951F4C28E9CCF2007FB6EE /* process.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = process.ts; sourceTree = "<group>"; };
+		27951F4D28E9CCF2007FB6EE /* input.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.ts; sourceTree = "<group>"; };
+		27951F4E28E9CCF2007FB6EE /* index.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = index.ts; sourceTree = "<group>"; };
+		27951F5028E9CCF2007FB6EE /* flowchartRender.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = flowchartRender.ts; sourceTree = "<group>"; };
+		27951F5128E9CCF2007FB6EE /* mathRender.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mathRender.ts; sourceTree = "<group>"; };
+		27951F5228E9CCF2007FB6EE /* plantumlRender.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = plantumlRender.ts; sourceTree = "<group>"; };
+		27951F5328E9CCF2007FB6EE /* getHTML.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = getHTML.ts; sourceTree = "<group>"; };
+		27951F5428E9CCF2007FB6EE /* adapterRender.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = adapterRender.ts; sourceTree = "<group>"; };
+		27951F5528E9CCF2007FB6EE /* previewRender.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = previewRender.ts; sourceTree = "<group>"; };
+		27951F5628E9CCF2007FB6EE /* anchorRender.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = anchorRender.ts; sourceTree = "<group>"; };
+		27951F5728E9CCF2007FB6EE /* setLute.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = setLute.ts; sourceTree = "<group>"; };
+		27951F5828E9CCF2007FB6EE /* mermaidRender.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mermaidRender.ts; sourceTree = "<group>"; };
+		27951F5928E9CCF2007FB6EE /* codeRender.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = codeRender.ts; sourceTree = "<group>"; };
+		27951F5A28E9CCF2007FB6EE /* highlightRender.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = highlightRender.ts; sourceTree = "<group>"; };
+		27951F5B28E9CCF2007FB6EE /* getMarkdown.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = getMarkdown.ts; sourceTree = "<group>"; };
+		27951F5D28E9CCF2007FB6EE /* index.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = index.ts; sourceTree = "<group>"; };
+		27951F5E28E9CCF2007FB6EE /* constants.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = constants.ts; sourceTree = "<group>"; };
+		27951F6028E9CCF2007FB6EE /* image.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = image.ts; sourceTree = "<group>"; };
 		2795956327B12CDC000B754C /* MiaoYan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MiaoYan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2799407B218484C900727B20 /* TitleBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleBarView.swift; sourceTree = "<group>"; };
 		27A1212C244176470016A14B /* MiaoYanCore_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MiaoYanCore_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -350,6 +616,475 @@
 			children = (
 			);
 			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		27951EB228E9CCF2007FB6EE /* IrEditor */ = {
+			isa = PBXGroup;
+			children = (
+				27951EB328E9CCF2007FB6EE /* demo */,
+				27951EBA28E9CCF2007FB6EE /* webpack.start.js */,
+				27951EBB28E9CCF2007FB6EE /* types */,
+				27951EBD28E9CCF2007FB6EE /* dist */,
+				27951F0C28E9CCF2007FB6EE /* .eslintrc */,
+				27951F0D28E9CCF2007FB6EE /* webpack.config.js */,
+				27951F0E28E9CCF2007FB6EE /* .editorconfig */,
+				27951F0F28E9CCF2007FB6EE /* package.json */,
+				27951F1028E9CCF2007FB6EE /* .prettierrc */,
+				27951F1128E9CCF2007FB6EE /* tsconfig.json */,
+				27951F1228E9CCF2007FB6EE /* .eslintignore */,
+				27951F1328E9CCF2007FB6EE /* src */,
+			);
+			name = IrEditor;
+			path = ../../Downloads/IrEditor;
+			sourceTree = "<group>";
+		};
+		27951EB328E9CCF2007FB6EE /* demo */ = {
+			isa = PBXGroup;
+			children = (
+				27951EB428E9CCF2007FB6EE /* markdown */,
+				27951EB928E9CCF2007FB6EE /* index.js */,
+			);
+			path = demo;
+			sourceTree = "<group>";
+		};
+		27951EB428E9CCF2007FB6EE /* markdown */ = {
+			isa = PBXGroup;
+			children = (
+				27951EB528E9CCF2007FB6EE /* entity.md */,
+				27951EB628E9CCF2007FB6EE /* cute-list.md */,
+				27951EB728E9CCF2007FB6EE /* zh_CN.md */,
+				27951EB828E9CCF2007FB6EE /* ko_KR.md */,
+			);
+			path = markdown;
+			sourceTree = "<group>";
+		};
+		27951EBB28E9CCF2007FB6EE /* types */ = {
+			isa = PBXGroup;
+			children = (
+				27951EBC28E9CCF2007FB6EE /* index.d.ts */,
+			);
+			path = types;
+			sourceTree = "<group>";
+		};
+		27951EBD28E9CCF2007FB6EE /* dist */ = {
+			isa = PBXGroup;
+			children = (
+				27951EBE28E9CCF2007FB6EE /* types */,
+				27951EC028E9CCF2007FB6EE /* css */,
+				27951EC428E9CCF2007FB6EE /* js */,
+				27951ED628E9CCF2007FB6EE /* index.css */,
+				27951ED728E9CCF2007FB6EE /* index.d.ts */,
+				27951ED828E9CCF2007FB6EE /* method.d.ts */,
+				27951ED928E9CCF2007FB6EE /* ts */,
+				27951F0A28E9CCF2007FB6EE /* index.min.js */,
+				27951F0B28E9CCF2007FB6EE /* method.min.js */,
+			);
+			path = dist;
+			sourceTree = "<group>";
+		};
+		27951EBE28E9CCF2007FB6EE /* types */ = {
+			isa = PBXGroup;
+			children = (
+				27951EBF28E9CCF2007FB6EE /* index.d.ts */,
+			);
+			path = types;
+			sourceTree = "<group>";
+		};
+		27951EC028E9CCF2007FB6EE /* css */ = {
+			isa = PBXGroup;
+			children = (
+				27951EC128E9CCF2007FB6EE /* content-theme */,
+			);
+			path = css;
+			sourceTree = "<group>";
+		};
+		27951EC128E9CCF2007FB6EE /* content-theme */ = {
+			isa = PBXGroup;
+			children = (
+				27951EC228E9CCF2007FB6EE /* dark.css */,
+				27951EC328E9CCF2007FB6EE /* light.css */,
+			);
+			path = "content-theme";
+			sourceTree = "<group>";
+		};
+		27951EC428E9CCF2007FB6EE /* js */ = {
+			isa = PBXGroup;
+			children = (
+				27951EC528E9CCF2007FB6EE /* plantuml */,
+				27951EC728E9CCF2007FB6EE /* katex */,
+				27951ECB28E9CCF2007FB6EE /* lute */,
+				27951ECD28E9CCF2007FB6EE /* highlight.js */,
+				27951ED428E9CCF2007FB6EE /* mermaid */,
+			);
+			path = js;
+			sourceTree = "<group>";
+		};
+		27951EC528E9CCF2007FB6EE /* plantuml */ = {
+			isa = PBXGroup;
+			children = (
+				27951EC628E9CCF2007FB6EE /* plantuml-encoder.min.js */,
+			);
+			path = plantuml;
+			sourceTree = "<group>";
+		};
+		27951EC728E9CCF2007FB6EE /* katex */ = {
+			isa = PBXGroup;
+			children = (
+				27951EC828E9CCF2007FB6EE /* katex.min.css */,
+				27951EC928E9CCF2007FB6EE /* katex.min.js */,
+				27951ECA28E9CCF2007FB6EE /* mhchem.min.js */,
+			);
+			path = katex;
+			sourceTree = "<group>";
+		};
+		27951ECB28E9CCF2007FB6EE /* lute */ = {
+			isa = PBXGroup;
+			children = (
+				27951ECC28E9CCF2007FB6EE /* lute.min.js */,
+			);
+			path = lute;
+			sourceTree = "<group>";
+		};
+		27951ECD28E9CCF2007FB6EE /* highlight.js */ = {
+			isa = PBXGroup;
+			children = (
+				27951ECE28E9CCF2007FB6EE /* highlight.pack.js */,
+				27951ECF28E9CCF2007FB6EE /* solidity.min.js */,
+				27951ED028E9CCF2007FB6EE /* styles */,
+				27951ED328E9CCF2007FB6EE /* yul.min.js */,
+			);
+			path = highlight.js;
+			sourceTree = "<group>";
+		};
+		27951ED028E9CCF2007FB6EE /* styles */ = {
+			isa = PBXGroup;
+			children = (
+				27951ED128E9CCF2007FB6EE /* xcode.css */,
+				27951ED228E9CCF2007FB6EE /* vs.css */,
+			);
+			path = styles;
+			sourceTree = "<group>";
+		};
+		27951ED428E9CCF2007FB6EE /* mermaid */ = {
+			isa = PBXGroup;
+			children = (
+				27951ED528E9CCF2007FB6EE /* mermaid.min.js */,
+			);
+			path = mermaid;
+			sourceTree = "<group>";
+		};
+		27951ED928E9CCF2007FB6EE /* ts */ = {
+			isa = PBXGroup;
+			children = (
+				27951EDA28E9CCF2007FB6EE /* constants.d.ts */,
+				27951EDB28E9CCF2007FB6EE /* hint */,
+				27951EDD28E9CCF2007FB6EE /* ui */,
+				27951EE328E9CCF2007FB6EE /* util */,
+				27951EF228E9CCF2007FB6EE /* ir */,
+				27951EF828E9CCF2007FB6EE /* markdown */,
+				27951F0528E9CCF2007FB6EE /* undo */,
+				27951F0728E9CCF2007FB6EE /* preview */,
+			);
+			path = ts;
+			sourceTree = "<group>";
+		};
+		27951EDB28E9CCF2007FB6EE /* hint */ = {
+			isa = PBXGroup;
+			children = (
+				27951EDC28E9CCF2007FB6EE /* index.d.ts */,
+			);
+			path = hint;
+			sourceTree = "<group>";
+		};
+		27951EDD28E9CCF2007FB6EE /* ui */ = {
+			isa = PBXGroup;
+			children = (
+				27951EDE28E9CCF2007FB6EE /* initUI.d.ts */,
+				27951EDF28E9CCF2007FB6EE /* setPreviewMode.d.ts */,
+				27951EE028E9CCF2007FB6EE /* setContentTheme.d.ts */,
+				27951EE128E9CCF2007FB6EE /* setCodeTheme.d.ts */,
+				27951EE228E9CCF2007FB6EE /* setTheme.d.ts */,
+			);
+			path = ui;
+			sourceTree = "<group>";
+		};
+		27951EE328E9CCF2007FB6EE /* util */ = {
+			isa = PBXGroup;
+			children = (
+				27951EE428E9CCF2007FB6EE /* processCode.d.ts */,
+				27951EE528E9CCF2007FB6EE /* editorCommonEvent.d.ts */,
+				27951EE628E9CCF2007FB6EE /* Options.d.ts */,
+				27951EE728E9CCF2007FB6EE /* code160to32.d.ts */,
+				27951EE828E9CCF2007FB6EE /* fixBrowserBehavior.d.ts */,
+				27951EE928E9CCF2007FB6EE /* getSelectText.d.ts */,
+				27951EEA28E9CCF2007FB6EE /* addStyle.d.ts */,
+				27951EEB28E9CCF2007FB6EE /* compatibility.d.ts */,
+				27951EEC28E9CCF2007FB6EE /* hasClosest.d.ts */,
+				27951EED28E9CCF2007FB6EE /* selection.d.ts */,
+				27951EEE28E9CCF2007FB6EE /* hasClosestByHeadings.d.ts */,
+				27951EEF28E9CCF2007FB6EE /* merge.d.ts */,
+				27951EF028E9CCF2007FB6EE /* hotKey.d.ts */,
+				27951EF128E9CCF2007FB6EE /* addScript.d.ts */,
+			);
+			path = util;
+			sourceTree = "<group>";
+		};
+		27951EF228E9CCF2007FB6EE /* ir */ = {
+			isa = PBXGroup;
+			children = (
+				27951EF328E9CCF2007FB6EE /* input.d.ts */,
+				27951EF428E9CCF2007FB6EE /* expandMarker.d.ts */,
+				27951EF528E9CCF2007FB6EE /* process.d.ts */,
+				27951EF628E9CCF2007FB6EE /* index.d.ts */,
+				27951EF728E9CCF2007FB6EE /* processKeydown.d.ts */,
+			);
+			path = ir;
+			sourceTree = "<group>";
+		};
+		27951EF828E9CCF2007FB6EE /* markdown */ = {
+			isa = PBXGroup;
+			children = (
+				27951EF928E9CCF2007FB6EE /* setLute.d.ts */,
+				27951EFA28E9CCF2007FB6EE /* codeRender.d.ts */,
+				27951EFB28E9CCF2007FB6EE /* adapterRender.d.ts */,
+				27951EFC28E9CCF2007FB6EE /* highlightRender.d.ts */,
+				27951EFD28E9CCF2007FB6EE /* anchorRender.d.ts */,
+				27951EFE28E9CCF2007FB6EE /* getHTML.d.ts */,
+				27951EFF28E9CCF2007FB6EE /* flowchartRender.d.ts */,
+				27951F0028E9CCF2007FB6EE /* previewRender.d.ts */,
+				27951F0128E9CCF2007FB6EE /* mathRender.d.ts */,
+				27951F0228E9CCF2007FB6EE /* getMarkdown.d.ts */,
+				27951F0328E9CCF2007FB6EE /* plantumlRender.d.ts */,
+				27951F0428E9CCF2007FB6EE /* mermaidRender.d.ts */,
+			);
+			path = markdown;
+			sourceTree = "<group>";
+		};
+		27951F0528E9CCF2007FB6EE /* undo */ = {
+			isa = PBXGroup;
+			children = (
+				27951F0628E9CCF2007FB6EE /* index.d.ts */,
+			);
+			path = undo;
+			sourceTree = "<group>";
+		};
+		27951F0728E9CCF2007FB6EE /* preview */ = {
+			isa = PBXGroup;
+			children = (
+				27951F0828E9CCF2007FB6EE /* index.d.ts */,
+				27951F0928E9CCF2007FB6EE /* image.d.ts */,
+			);
+			path = preview;
+			sourceTree = "<group>";
+		};
+		27951F1328E9CCF2007FB6EE /* src */ = {
+			isa = PBXGroup;
+			children = (
+				27951F1428E9CCF2007FB6EE /* css */,
+				27951F1828E9CCF2007FB6EE /* js */,
+				27951F2A28E9CCF2007FB6EE /* method.ts */,
+				27951F2B28E9CCF2007FB6EE /* index.ts */,
+				27951F2C28E9CCF2007FB6EE /* assets */,
+				27951F3328E9CCF2007FB6EE /* ts */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		27951F1428E9CCF2007FB6EE /* css */ = {
+			isa = PBXGroup;
+			children = (
+				27951F1528E9CCF2007FB6EE /* content-theme */,
+			);
+			path = css;
+			sourceTree = "<group>";
+		};
+		27951F1528E9CCF2007FB6EE /* content-theme */ = {
+			isa = PBXGroup;
+			children = (
+				27951F1628E9CCF2007FB6EE /* dark.css */,
+				27951F1728E9CCF2007FB6EE /* light.css */,
+			);
+			path = "content-theme";
+			sourceTree = "<group>";
+		};
+		27951F1828E9CCF2007FB6EE /* js */ = {
+			isa = PBXGroup;
+			children = (
+				27951F1928E9CCF2007FB6EE /* plantuml */,
+				27951F1B28E9CCF2007FB6EE /* katex */,
+				27951F1F28E9CCF2007FB6EE /* lute */,
+				27951F2128E9CCF2007FB6EE /* highlight.js */,
+				27951F2828E9CCF2007FB6EE /* mermaid */,
+			);
+			path = js;
+			sourceTree = "<group>";
+		};
+		27951F1928E9CCF2007FB6EE /* plantuml */ = {
+			isa = PBXGroup;
+			children = (
+				27951F1A28E9CCF2007FB6EE /* plantuml-encoder.min.js */,
+			);
+			path = plantuml;
+			sourceTree = "<group>";
+		};
+		27951F1B28E9CCF2007FB6EE /* katex */ = {
+			isa = PBXGroup;
+			children = (
+				27951F1C28E9CCF2007FB6EE /* katex.min.css */,
+				27951F1D28E9CCF2007FB6EE /* katex.min.js */,
+				27951F1E28E9CCF2007FB6EE /* mhchem.min.js */,
+			);
+			path = katex;
+			sourceTree = "<group>";
+		};
+		27951F1F28E9CCF2007FB6EE /* lute */ = {
+			isa = PBXGroup;
+			children = (
+				27951F2028E9CCF2007FB6EE /* lute.min.js */,
+			);
+			path = lute;
+			sourceTree = "<group>";
+		};
+		27951F2128E9CCF2007FB6EE /* highlight.js */ = {
+			isa = PBXGroup;
+			children = (
+				27951F2228E9CCF2007FB6EE /* highlight.pack.js */,
+				27951F2328E9CCF2007FB6EE /* solidity.min.js */,
+				27951F2428E9CCF2007FB6EE /* styles */,
+				27951F2728E9CCF2007FB6EE /* yul.min.js */,
+			);
+			path = highlight.js;
+			sourceTree = "<group>";
+		};
+		27951F2428E9CCF2007FB6EE /* styles */ = {
+			isa = PBXGroup;
+			children = (
+				27951F2528E9CCF2007FB6EE /* xcode.css */,
+				27951F2628E9CCF2007FB6EE /* vs.css */,
+			);
+			path = styles;
+			sourceTree = "<group>";
+		};
+		27951F2828E9CCF2007FB6EE /* mermaid */ = {
+			isa = PBXGroup;
+			children = (
+				27951F2928E9CCF2007FB6EE /* mermaid.min.js */,
+			);
+			path = mermaid;
+			sourceTree = "<group>";
+		};
+		27951F2C28E9CCF2007FB6EE /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				27951F2D28E9CCF2007FB6EE /* less */,
+			);
+			path = assets;
+			sourceTree = "<group>";
+		};
+		27951F2D28E9CCF2007FB6EE /* less */ = {
+			isa = PBXGroup;
+			children = (
+				27951F2E28E9CCF2007FB6EE /* _reset.less */,
+				27951F2F28E9CCF2007FB6EE /* _ir.less */,
+				27951F3028E9CCF2007FB6EE /* index.less */,
+				27951F3128E9CCF2007FB6EE /* _panel.less */,
+				27951F3228E9CCF2007FB6EE /* _content.less */,
+			);
+			path = less;
+			sourceTree = "<group>";
+		};
+		27951F3328E9CCF2007FB6EE /* ts */ = {
+			isa = PBXGroup;
+			children = (
+				27951F3428E9CCF2007FB6EE /* ui */,
+				27951F3A28E9CCF2007FB6EE /* util */,
+				27951F4928E9CCF2007FB6EE /* ir */,
+				27951F4F28E9CCF2007FB6EE /* markdown */,
+				27951F5C28E9CCF2007FB6EE /* undo */,
+				27951F5E28E9CCF2007FB6EE /* constants.ts */,
+				27951F5F28E9CCF2007FB6EE /* preview */,
+			);
+			path = ts;
+			sourceTree = "<group>";
+		};
+		27951F3428E9CCF2007FB6EE /* ui */ = {
+			isa = PBXGroup;
+			children = (
+				27951F3528E9CCF2007FB6EE /* setContentTheme.ts */,
+				27951F3628E9CCF2007FB6EE /* setPreviewMode.ts */,
+				27951F3728E9CCF2007FB6EE /* initUI.ts */,
+				27951F3828E9CCF2007FB6EE /* setTheme.ts */,
+				27951F3928E9CCF2007FB6EE /* setCodeTheme.ts */,
+			);
+			path = ui;
+			sourceTree = "<group>";
+		};
+		27951F3A28E9CCF2007FB6EE /* util */ = {
+			isa = PBXGroup;
+			children = (
+				27951F3B28E9CCF2007FB6EE /* addScript.ts */,
+				27951F3C28E9CCF2007FB6EE /* selection.ts */,
+				27951F3D28E9CCF2007FB6EE /* hasClosestByHeadings.ts */,
+				27951F3E28E9CCF2007FB6EE /* addStyle.ts */,
+				27951F3F28E9CCF2007FB6EE /* code160to32.ts */,
+				27951F4028E9CCF2007FB6EE /* editorCommonEvent.ts */,
+				27951F4128E9CCF2007FB6EE /* fixBrowserBehavior.ts */,
+				27951F4228E9CCF2007FB6EE /* hasClosest.ts */,
+				27951F4328E9CCF2007FB6EE /* getSelectText.ts */,
+				27951F4428E9CCF2007FB6EE /* merge.ts */,
+				27951F4528E9CCF2007FB6EE /* hotKey.ts */,
+				27951F4628E9CCF2007FB6EE /* compatibility.ts */,
+				27951F4728E9CCF2007FB6EE /* Options.ts */,
+				27951F4828E9CCF2007FB6EE /* processCode.ts */,
+			);
+			path = util;
+			sourceTree = "<group>";
+		};
+		27951F4928E9CCF2007FB6EE /* ir */ = {
+			isa = PBXGroup;
+			children = (
+				27951F4A28E9CCF2007FB6EE /* expandMarker.ts */,
+				27951F4B28E9CCF2007FB6EE /* processKeydown.ts */,
+				27951F4C28E9CCF2007FB6EE /* process.ts */,
+				27951F4D28E9CCF2007FB6EE /* input.ts */,
+				27951F4E28E9CCF2007FB6EE /* index.ts */,
+			);
+			path = ir;
+			sourceTree = "<group>";
+		};
+		27951F4F28E9CCF2007FB6EE /* markdown */ = {
+			isa = PBXGroup;
+			children = (
+				27951F5028E9CCF2007FB6EE /* flowchartRender.ts */,
+				27951F5128E9CCF2007FB6EE /* mathRender.ts */,
+				27951F5228E9CCF2007FB6EE /* plantumlRender.ts */,
+				27951F5328E9CCF2007FB6EE /* getHTML.ts */,
+				27951F5428E9CCF2007FB6EE /* adapterRender.ts */,
+				27951F5528E9CCF2007FB6EE /* previewRender.ts */,
+				27951F5628E9CCF2007FB6EE /* anchorRender.ts */,
+				27951F5728E9CCF2007FB6EE /* setLute.ts */,
+				27951F5828E9CCF2007FB6EE /* mermaidRender.ts */,
+				27951F5928E9CCF2007FB6EE /* codeRender.ts */,
+				27951F5A28E9CCF2007FB6EE /* highlightRender.ts */,
+				27951F5B28E9CCF2007FB6EE /* getMarkdown.ts */,
+			);
+			path = markdown;
+			sourceTree = "<group>";
+		};
+		27951F5C28E9CCF2007FB6EE /* undo */ = {
+			isa = PBXGroup;
+			children = (
+				27951F5D28E9CCF2007FB6EE /* index.ts */,
+			);
+			path = undo;
+			sourceTree = "<group>";
+		};
+		27951F5F28E9CCF2007FB6EE /* preview */ = {
+			isa = PBXGroup;
+			children = (
+				27951F6028E9CCF2007FB6EE /* image.ts */,
+			);
+			path = preview;
 			sourceTree = "<group>";
 		};
 		27A1AE302844BA83006DF055 /* Fonts */ = {
@@ -509,6 +1244,7 @@
 		D7793C661F211C6000CA39B7 = {
 			isa = PBXGroup;
 			children = (
+				27951EB228E9CCF2007FB6EE /* IrEditor */,
 				6F13BB2320FEDE230005E120 /* Common */,
 				D7D61FCC1F32EEA1004357C2 /* Resources */,
 				D7793C711F211C6000CA39B7 /* Mac */,
@@ -770,16 +1506,149 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27951F9E28E9CCF2007FB6EE /* mermaidRender.d.ts in Resources */,
+				27951FCD28E9CCF2007FB6EE /* merge.ts in Resources */,
+				27951FD228E9CCF3007FB6EE /* expandMarker.ts in Resources */,
+				27951F7128E9CCF2007FB6EE /* solidity.min.js in Resources */,
+				27951FD028E9CCF3007FB6EE /* Options.ts in Resources */,
+				27951FCC28E9CCF2007FB6EE /* getSelectText.ts in Resources */,
+				27951F9128E9CCF2007FB6EE /* index.d.ts in Resources */,
+				27951FB328E9CCF2007FB6EE /* solidity.min.js in Resources */,
+				27951F8828E9CCF2007FB6EE /* hasClosest.d.ts in Resources */,
+				27951F9A28E9CCF2007FB6EE /* previewRender.d.ts in Resources */,
+				27951F9428E9CCF2007FB6EE /* codeRender.d.ts in Resources */,
+				27951FB028E9CCF2007FB6EE /* mhchem.min.js in Resources */,
+				27951FA328E9CCF2007FB6EE /* method.min.js in Resources */,
+				27951FE328E9CCF3007FB6EE /* index.ts in Resources */,
+				27951FDE28E9CCF3007FB6EE /* setLute.ts in Resources */,
+				27951F6F28E9CCF2007FB6EE /* lute.min.js in Resources */,
+				27951FA628E9CCF2007FB6EE /* .editorconfig in Resources */,
+				27951F6A28E9CCF2007FB6EE /* light.css in Resources */,
+				27951F9528E9CCF2007FB6EE /* adapterRender.d.ts in Resources */,
+				27951F7728E9CCF2007FB6EE /* index.d.ts in Resources */,
+				27951F9228E9CCF2007FB6EE /* processKeydown.d.ts in Resources */,
+				27951F6528E9CCF2007FB6EE /* index.js in Resources */,
+				27951FE428E9CCF3007FB6EE /* constants.ts in Resources */,
+				27951F9D28E9CCF2007FB6EE /* plantumlRender.d.ts in Resources */,
+				27951F6928E9CCF2007FB6EE /* dark.css in Resources */,
+				27951F9B28E9CCF2007FB6EE /* mathRender.d.ts in Resources */,
+				27951FC628E9CCF2007FB6EE /* hasClosestByHeadings.ts in Resources */,
+				27951F7F28E9CCF2007FB6EE /* setTheme.d.ts in Resources */,
+				27951FC128E9CCF2007FB6EE /* initUI.ts in Resources */,
+				27951FB528E9CCF2007FB6EE /* vs.css in Resources */,
 				D158E66B28BB248A0090B304 /* Prettier.bundle in Resources */,
+				27951FD428E9CCF3007FB6EE /* process.ts in Resources */,
+				27951FBD28E9CCF2007FB6EE /* _panel.less in Resources */,
+				27951F6228E9CCF2007FB6EE /* cute-list.md in Resources */,
+				27951FAC28E9CCF2007FB6EE /* light.css in Resources */,
+				27951FA728E9CCF2007FB6EE /* package.json in Resources */,
+				27951F8C28E9CCF2007FB6EE /* hotKey.d.ts in Resources */,
+				27951F8428E9CCF2007FB6EE /* fixBrowserBehavior.d.ts in Resources */,
+				27951F9C28E9CCF2007FB6EE /* getMarkdown.d.ts in Resources */,
+				27951F6328E9CCF2007FB6EE /* zh_CN.md in Resources */,
+				27951F6628E9CCF2007FB6EE /* webpack.start.js in Resources */,
 				D71C4A4E1F520F1B00EBA30B /* DownView.bundle in Resources */,
+				27951FAD28E9CCF2007FB6EE /* plantuml-encoder.min.js in Resources */,
+				27951F9628E9CCF2007FB6EE /* highlightRender.d.ts in Resources */,
+				27951FB628E9CCF2007FB6EE /* yul.min.js in Resources */,
+				27951FB928E9CCF2007FB6EE /* index.ts in Resources */,
+				27951F6728E9CCF2007FB6EE /* index.d.ts in Resources */,
+				27951FB128E9CCF2007FB6EE /* lute.min.js in Resources */,
+				27951FC228E9CCF2007FB6EE /* setTheme.ts in Resources */,
+				27951F7928E9CCF2007FB6EE /* constants.d.ts in Resources */,
+				27951FD328E9CCF3007FB6EE /* processKeydown.ts in Resources */,
+				27951FDA28E9CCF3007FB6EE /* getHTML.ts in Resources */,
+				27951FCB28E9CCF2007FB6EE /* hasClosest.ts in Resources */,
+				27951FBA28E9CCF2007FB6EE /* _reset.less in Resources */,
+				27951FBC28E9CCF2007FB6EE /* index.less in Resources */,
+				27951F6128E9CCF2007FB6EE /* entity.md in Resources */,
+				27951F8228E9CCF2007FB6EE /* Options.d.ts in Resources */,
+				27951FD628E9CCF3007FB6EE /* index.ts in Resources */,
+				27951F6428E9CCF2007FB6EE /* ko_KR.md in Resources */,
+				27951FDB28E9CCF3007FB6EE /* adapterRender.ts in Resources */,
 				D7465F28207F2CD600E46A52 /* Images.xcassets in Resources */,
+				27951F9328E9CCF2007FB6EE /* setLute.d.ts in Resources */,
+				27951F7D28E9CCF2007FB6EE /* setContentTheme.d.ts in Resources */,
+				27951F6E28E9CCF2007FB6EE /* mhchem.min.js in Resources */,
+				27951F7E28E9CCF2007FB6EE /* setCodeTheme.d.ts in Resources */,
+				27951FB428E9CCF2007FB6EE /* xcode.css in Resources */,
+				27951FA028E9CCF2007FB6EE /* index.d.ts in Resources */,
+				27951F7428E9CCF2007FB6EE /* yul.min.js in Resources */,
 				272CAC1E287577E70026EF50 /* ContentViewController.xib in Resources */,
+				27951FAE28E9CCF2007FB6EE /* katex.min.css in Resources */,
+				27951F6B28E9CCF2007FB6EE /* plantuml-encoder.min.js in Resources */,
 				2747D5B5284E05CE00D0127B /* LXGWWenKaiLite-Bold.ttf in Resources */,
+				27951FDD28E9CCF3007FB6EE /* anchorRender.ts in Resources */,
+				27951FC528E9CCF2007FB6EE /* selection.ts in Resources */,
 				D7ED6892200F87BD00FF975A /* Initial in Resources */,
+				27951FC028E9CCF2007FB6EE /* setPreviewMode.ts in Resources */,
 				2747D5B4284E05CE00D0127B /* LXGWWenKaiLite-Regular.ttf in Resources */,
+				27951F8528E9CCF2007FB6EE /* getSelectText.d.ts in Resources */,
+				27951F7328E9CCF2007FB6EE /* vs.css in Resources */,
+				27951FA828E9CCF2007FB6EE /* .prettierrc in Resources */,
+				27951F8A28E9CCF2007FB6EE /* hasClosestByHeadings.d.ts in Resources */,
+				27951FE528E9CCF3007FB6EE /* image.ts in Resources */,
+				27951F8E28E9CCF2007FB6EE /* input.d.ts in Resources */,
+				27951FAA28E9CCF2007FB6EE /* .eslintignore in Resources */,
+				27951F9028E9CCF2007FB6EE /* process.d.ts in Resources */,
+				27951F7828E9CCF2007FB6EE /* method.d.ts in Resources */,
+				27951F7028E9CCF2007FB6EE /* highlight.pack.js in Resources */,
 				D7FBBC2520F151F80014EC5B /* Localizable.strings in Resources */,
+				27951FCA28E9CCF2007FB6EE /* fixBrowserBehavior.ts in Resources */,
+				27951FD828E9CCF3007FB6EE /* mathRender.ts in Resources */,
+				27951FC428E9CCF2007FB6EE /* addScript.ts in Resources */,
+				27951FA528E9CCF2007FB6EE /* webpack.config.js in Resources */,
+				27951F7628E9CCF2007FB6EE /* index.css in Resources */,
+				27951F6828E9CCF2007FB6EE /* index.d.ts in Resources */,
+				27951FAF28E9CCF2007FB6EE /* katex.min.js in Resources */,
+				27951FD528E9CCF3007FB6EE /* input.ts in Resources */,
+				27951FCE28E9CCF2007FB6EE /* hotKey.ts in Resources */,
+				27951FA928E9CCF2007FB6EE /* tsconfig.json in Resources */,
+				27951FDF28E9CCF3007FB6EE /* mermaidRender.ts in Resources */,
+				27951FBF28E9CCF2007FB6EE /* setContentTheme.ts in Resources */,
+				27951FE028E9CCF3007FB6EE /* codeRender.ts in Resources */,
+				27951F8B28E9CCF2007FB6EE /* merge.d.ts in Resources */,
+				27951F8728E9CCF2007FB6EE /* compatibility.d.ts in Resources */,
+				27951F6D28E9CCF2007FB6EE /* katex.min.js in Resources */,
 				2714D861285196D70026BDE4 /* InfoPlist.strings in Resources */,
+				27951F8328E9CCF2007FB6EE /* code160to32.d.ts in Resources */,
 				D7166F541F32F75E001A883F /* Main.storyboard in Resources */,
+				27951F8028E9CCF2007FB6EE /* processCode.d.ts in Resources */,
+				27951F9F28E9CCF2007FB6EE /* index.d.ts in Resources */,
+				27951F8128E9CCF2007FB6EE /* editorCommonEvent.d.ts in Resources */,
+				27951FA228E9CCF2007FB6EE /* index.min.js in Resources */,
+				27951FD728E9CCF3007FB6EE /* flowchartRender.ts in Resources */,
+				27951F9728E9CCF2007FB6EE /* anchorRender.d.ts in Resources */,
+				27951FBE28E9CCF2007FB6EE /* _content.less in Resources */,
+				27951F6C28E9CCF2007FB6EE /* katex.min.css in Resources */,
+				27951FCF28E9CCF3007FB6EE /* compatibility.ts in Resources */,
+				27951FE128E9CCF3007FB6EE /* highlightRender.ts in Resources */,
+				27951FA428E9CCF2007FB6EE /* .eslintrc in Resources */,
+				27951F7C28E9CCF2007FB6EE /* setPreviewMode.d.ts in Resources */,
+				27951FD928E9CCF3007FB6EE /* plantumlRender.ts in Resources */,
+				27951F7A28E9CCF2007FB6EE /* index.d.ts in Resources */,
+				27951FC928E9CCF2007FB6EE /* editorCommonEvent.ts in Resources */,
+				27951F9828E9CCF2007FB6EE /* getHTML.d.ts in Resources */,
+				27951FDC28E9CCF3007FB6EE /* previewRender.ts in Resources */,
+				27951FA128E9CCF2007FB6EE /* image.d.ts in Resources */,
+				27951FBB28E9CCF2007FB6EE /* _ir.less in Resources */,
+				27951FB728E9CCF2007FB6EE /* mermaid.min.js in Resources */,
+				27951F7B28E9CCF2007FB6EE /* initUI.d.ts in Resources */,
+				27951F7228E9CCF2007FB6EE /* xcode.css in Resources */,
+				27951F8928E9CCF2007FB6EE /* selection.d.ts in Resources */,
+				27951F8628E9CCF2007FB6EE /* addStyle.d.ts in Resources */,
+				27951FC728E9CCF2007FB6EE /* addStyle.ts in Resources */,
+				27951F7528E9CCF2007FB6EE /* mermaid.min.js in Resources */,
+				27951FE228E9CCF3007FB6EE /* getMarkdown.ts in Resources */,
+				27951FAB28E9CCF2007FB6EE /* dark.css in Resources */,
+				27951F8D28E9CCF2007FB6EE /* addScript.d.ts in Resources */,
+				27951FB228E9CCF2007FB6EE /* highlight.pack.js in Resources */,
+				27951FD128E9CCF3007FB6EE /* processCode.ts in Resources */,
+				27951FC328E9CCF2007FB6EE /* setCodeTheme.ts in Resources */,
+				27951F8F28E9CCF2007FB6EE /* expandMarker.d.ts in Resources */,
+				27951FC828E9CCF2007FB6EE /* code160to32.ts in Resources */,
+				27951F9928E9CCF2007FB6EE /* flowchartRender.d.ts in Resources */,
+				27951FB828E9CCF2007FB6EE /* method.ts in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
