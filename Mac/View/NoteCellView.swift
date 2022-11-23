@@ -17,33 +17,16 @@ class NoteCellView: NSTableCellView {
         return vc.notesTableView
     }
 
-    override func viewWillDraw() {
-        if let originY = UserDefaultsManagement.cellViewFrameOriginY {
-            adjustTopMargin(margin: originY)
-        }
-        super.viewWillDraw()
-    }
-
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
-
         renderPin()
-        pin.frame.origin.y = CGFloat(-4) + CGFloat(cellSpacing) + CGFloat(0)
-        
         updateSelectionHighlight()
-
-        name.font = UserDefaultsManagement.nameFont
-        date.font = UserDefaultsManagement.dateFont
-
-        name.addCharacterSpacing()
-        date.addCharacterSpacing()
     }
 
     public func configure(note: Note) {
         self.note = note
     }
 
-    // This NoteCellView has multiple contained views; this method changes
 
     // these views' color when the cell is selected.
     override var backgroundStyle: NSView.BackgroundStyle {
@@ -56,6 +39,13 @@ class NoteCellView: NSTableCellView {
     }
 
     public func updateSelectionHighlight() {
+        
+        // 字体和间距
+        name.font = UserDefaultsManagement.nameFont
+        date.font = UserDefaultsManagement.dateFont
+        name.addCharacterSpacing()
+        date.addCharacterSpacing()
+        
         if backgroundStyle == NSView.BackgroundStyle.dark {
             date.textColor = NSColor.white
             name.textColor = NSColor.white
@@ -134,7 +124,5 @@ class NoteCellView: NSTableCellView {
             date.stringValue = note.getDateForLabel()
         }
         updateSelectionHighlight()
-        name.addCharacterSpacing()
-        date.addCharacterSpacing()
     }
 }

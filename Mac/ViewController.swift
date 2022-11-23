@@ -29,7 +29,7 @@ class ViewController:
     let searchQueue = OperationQueue()
     var isFocusedTitle: Bool = false
     var formatContent: String = ""
-    var isFirstClick: Bool = true
+    var isLaunch: Bool = true
 
     private var isHandlingScrollEvent = false
     private var swipeLeftExecuted = false
@@ -300,31 +300,36 @@ class ViewController:
         setDividerHidden(hidden: size == 0)
         refreshMiaoYanNum()
 
-        if UserDefaultsManagement.isSingleMode {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        if UserDefaultsManagement.isSingleMode, isLaunch {
+             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 vc.hideSidebar("")
             }
-
-            // hack for crash
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                vc.toastInSingleMode()
-            }
-        } else if sideSize == 0 {
+        } else if UserDefaultsManagement.isFirstLaunch {
+            //用于恢复单独模式后打开复原的效果
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 vc.showSidebar("")
                 vc.setSideDividerHidden(hidden: false)
             }
+            UserDefaultsManagement.isFirstLaunch = false
         }
 
-        // 兼容新系统 13.0 的标题闪动问题
-        if isFirstClick, #available(OSX 13.0, *) {
+        //用于恢复聚焦模式时候重启应用后的效果
+        if isLaunch, size == 0 {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                vc.showNoteList("")
+                vc.setDividerHidden(hidden: false)
+            }
+        }
+        
+        //解决标题高度计算的问题，首次使用的时候
+        if isLaunch, #available(OSX 13.0, *) {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
                 self.titleLabel.editModeOn()
                 self.enablePreview()
                 self.disablePreview()
                 self.focusEditArea()
             }
-            isFirstClick = false
+            isLaunch = false
         }
     }
 
@@ -442,9 +447,10 @@ class ViewController:
                 if UserDefaultsManagement.isSingleMode {
                     let singleModeUrl = URL(fileURLWithPath: UserDefaultsManagement.singleModePath)
                     if !FileManager.default.directoryExists(atUrl: singleModeUrl), let lastNote = self.storage.getBy(url: singleModeUrl), let i = self.notesTableView.getIndex(lastNote) {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        DispatchQueue.main.async {
                             self.notesTableView.selectRow(i)
-                            self.notesTableView.scrollRowToVisible(row: i, animated: true)
+                            self.notesTableView.scrollRowToVisible(row: i, animated: false)
+                            self.hideNoteList("")
                         }
                     }
                 }
@@ -463,8 +469,7 @@ class ViewController:
         editArea.textStorage?.delegate = editArea.textStorage
         if #available(OSX 10.13, *) {
             editArea?.linkTextAttributes = [
-                .foregroundColor: NSColor(named: "highlight")!,
-                .cursor: NSCursor.pointingHand,
+                .foregroundColor: NSColor(named: "highlight")!
             ]
         }
         editArea.viewDelegate = self
@@ -2200,6 +2205,8 @@ class ViewController:
             return
         }
         if let note = notesTableView.getSelectedNote() {
+            // 先保存一下标题，防止首次的时候
+            titleLabel.saveTitle()
             // 最牛逼格式化的方式
             let formatter = PrettierFormatter(plugins: [MarkdownPlugin()], parser: MarkdownParser())
             formatter.prepare()
